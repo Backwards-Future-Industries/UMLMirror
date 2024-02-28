@@ -1,13 +1,12 @@
 <script>
   import "../../app.css";
-  import Topbar from "./topbar.svelte";
-  import ElementSelactor from "./elementSelactor.svelte";
+  import NavBar from "../navBar.svelte";
+  import ElementSelector from "./elementSelector.svelte";
 </script>
 
+<div class="">
+  <NavBar />
+  <ElementSelector />
+</div>
 
-<div>
-  <Topbar />
-</div>
-<div>
-  <ElementSelactor />
-</div>
+
