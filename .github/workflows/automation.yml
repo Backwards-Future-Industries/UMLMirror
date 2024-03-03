@@ -20,6 +20,8 @@ jobs:
         steps:
             - name: Create Issue Branch
               uses: peterjgrainger/action-create-branch@v3.0.0
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                 branch: '#${{ github.event.issue.number }} - ${{ github.event.issue.title }}'
         
