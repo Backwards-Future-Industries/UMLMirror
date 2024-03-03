@@ -21,7 +21,7 @@ jobs:
               uses: peterjgrainger/action-create-branch@v3.0.0
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                name: eche ${{github.event.issue.title}} | tr " " "-"
+                NAME: echo ${{github.event.issue.title}} | tr -s " " "-"
               with:
-                branch: "#${{ github.event.issue.number }}-$name"
+                branch: "#${{ github.event.issue.number }}-${{ env.NAME }}"
         
