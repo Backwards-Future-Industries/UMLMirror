@@ -19,5 +19,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Create Issue Branch
-              run: git branch "#${{ github.event.issue.number }}-${{ github.event.issue.title }}"
+              uses: peterjgrainger/action-create-branch@v3.0.0
+              with:
+                branch: '#${{ github.event.issue.number }} - ${{ github.event.issue.title }}'
         
