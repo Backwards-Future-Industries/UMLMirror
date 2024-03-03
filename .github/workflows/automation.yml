@@ -17,12 +17,11 @@ jobs:
         if: github.event.label.name == 'In Progress'
         runs-on: ubuntu-latest
         steps:
-            - name: replace whitespace with hyphen
-              run: echo "issue_hyphen=${{github.event.issue.title}}" | tr " " "-" >> "$GITHUB_ENV"
             - name: Create Issue Branch
               uses: peterjgrainger/action-create-branch@v3.0.0
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                name: eche ${{github.event.issue.title}} | tr " " "-"
               with:
-                branch: '#${{ github.event.issue.number }}-${{issue_hyphen}}'
+                branch: "#${{ github.event.issue.number }}-$name"
         
