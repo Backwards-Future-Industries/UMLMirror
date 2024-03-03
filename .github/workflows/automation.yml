@@ -8,13 +8,13 @@ env:
 
 jobs:
     Ready-For-Merge:
-        if: github.event.issue.label.name == 'Ready For Merge'
+        if: github.event.label.name == 'Ready For Merge'
         runs-on: ubuntu-latest
         steps:
             - name: create pr
               run: gh pr create --base master --title "pull request ${GITHUB_REF##*/} to master" --body "this is a pull request from ${GITHUB_REF##*/} to master"
     In-Progress:
-        if: github.event.issue.label.name == 'In Progress'
+        if: github.event.label.name == 'In Progress'
         runs-on: ubuntu-latest
         steps:
             - name: Create Issue Branch
