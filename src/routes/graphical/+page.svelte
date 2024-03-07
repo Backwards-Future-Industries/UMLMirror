@@ -1,11 +1,11 @@
 <script>
   import "../../app.css";
-  import NavBar from "../navBar.svelte";
-  import ElementSelector from "./elementSelector.svelte";
+  import Navbar from "$lib/components/navBar.svelte";
+  import ElementSelector from "$lib/components/elementSelector.svelte";
 </script>
 
 <div class="">
-  <NavBar />
+  <Navbar />
   <ElementSelector />
 </div>
 
