@@ -1,0 +1,37 @@
+digraph {
+    node [shape=plaintext];
+
+    MyClass [
+        label=<
+            <table border="0" cellborder="1" cellspacing="0" width="auto">
+                <tr>
+                    <td bgcolor="lightgrey"><b>MyClass</b></td>
+                </tr>
+                <tr>
+                    <td align="left" port="attributes">- attribute1: type<br/>- attribute2: type</td>
+                </tr>
+                <tr>
+                    <td align="left" port="methods">+ method1(): return_type<br/>+ method2(param: type): return_type</td>
+                </tr>
+            </table>
+        >
+    ];
+
+    OtherClass [
+        label=<
+            <table border="0" cellborder="1" cellspacing="0" width="auto">
+                <tr>
+                    <td bgcolor="lightgrey"><b>OtherClass</b></td>
+                </tr>
+                <tr>
+                    <td align="left" port="attributes">- attribute1: type <br/>- attribute2: type </td>
+                </tr>
+                <tr>
+                    <td align="left" port="methods">+ method1(): return_type<br/>+ method2(param: type): return_type</td>
+                </tr>
+            </table>
+        >
+    ];
+
+    MyClass -> OtherClass;
+}
