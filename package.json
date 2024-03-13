@@ -17,9 +17,5 @@
 		"tailwindcss": "^3.4.1",
 		"vite": "^5.0.3"
 	},
-	"type": "module",
-	"dependencies": {
-		"@svgdotjs/svg.draggable.js": "^3.0.3",
-		"@svgdotjs/svg.js": "^3.2.0"
-	}
+	"type": "module"
 }
