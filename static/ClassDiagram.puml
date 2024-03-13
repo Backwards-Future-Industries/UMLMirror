@@ -1,0 +1,42 @@
+@startuml UMLDiagram
+    
+class class{
+    -String name;
+    -type enum;
+    -String[] attributes;
+    -String[] methods;
+}
+
+class attribute{
+    -String name;
+    -enum access modifier;
+    -String dataType;
+}
+
+class method{
+    -String name;
+    -enum access modifier;
+    -String Parameters;
+    -String returnType;
+}
+
+class association{
+    -class class1;
+    -class class2;
+    -class arrow;
+}
+
+class arrow{
+    -enum tailStart;
+    -enum tailEnd;
+    -String tailStartText;
+    -String tailEndText;
+    -enum type;
+}
+
+class ..|> attribute
+class ..|> method
+association ..|> class
+association ..|> arrow
+
+@enduml

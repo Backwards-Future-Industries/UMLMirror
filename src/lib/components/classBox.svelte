@@ -1,0 +1,54 @@
+<script>
+    let title = "Title";
+    let attributes = "Attribute";
+    let methods = "Methods";
+    let width = 100;
+    let height = 100;
+    
+    let x = 0;
+    let y = 0;
+
+    let moving = false;
+	
+	function onMouseDown() {
+		moving = true;
+	}
+	
+	function onMouseMove(e) {
+		if (moving) {
+			x += e.movementX;
+			y += e.movementY;
+		}
+	}
+	
+	function onMouseUp() {
+		moving = false;
+	}
+
+</script>
+
+
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<svg on:mousedown={onMouseDown} class="draggable">
+    <rect x={x} y={y} width={width} height={height} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" />
+    <g>
+        <text x={x+50} y={y+20} text-anchor="middle" font-size="16" font-weight="bold">{title}</text>
+    </g>
+    <line x1={x} y1={y+30} x2={x+100} y2={y+30} stroke="black" stroke-width="2" />
+    <g>
+        <text x={x+50} y={y+50} text-anchor="middle" font-size="16" font-weight="bold">{attributes}</text>
+    </g>
+    <line x1={x} y1={y+70} x2={x+100} y2={y+70} stroke="black" stroke-width="2" />
+    <g>
+        <text x={x+50} y={y+90} text-anchor="middle" font-size="16" font-weight="bold">{methods}</text>
+    </g>
+</svg>
+
+<style>
+	.draggable {
+		user-select: none;
+		cursor: move;
+    }
+</style>
+
+<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
