@@ -24,9 +24,6 @@ export default {
         "base-200": "#C9CFD8",
         "base-100": "#e2e6eb",
         "base-50": "#F4F6F7",
-      },
-      width: {
-        'textarea-width': '390px'
       }
     },
   },
