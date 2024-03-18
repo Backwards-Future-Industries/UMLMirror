@@ -1,5 +1,10 @@
+<svelte:options accessors/>
 <script>
-    let title = "Title";
+    import {createEventDispatcher} from 'svelte';
+    import { faker } from '@faker-js/faker/locale/da';
+    const dispatch = createEventDispatcher();
+    
+    let title = faker.person.firstName();
     let attributes = "Attribute";
     let methods = "Methods";
     let width = 100;
@@ -12,6 +17,7 @@
 	
 	function onMouseDown() {
 		moving = true;
+        focus();
 	}
 	
 	function onMouseMove(e) {
@@ -25,10 +31,15 @@
 		moving = false;
 	}
 
+    function focus(){
+        dispatch('focus', {title: title , coordinates: {x: x, y: y}});
+    }
+
 </script>
 
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg>
     <rect x={x} y={y} width={width} height={height} on:mousedown={onMouseDown} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" class=" hover:cursor-move" />
     <g>

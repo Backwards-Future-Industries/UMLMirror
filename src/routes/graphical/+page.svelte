@@ -1,6 +1,5 @@
 <script>
   import ClassButton from "$lib/components/classButton.svelte";
-  import ClassBox from "$lib/components/classBox.svelte";
   import Canvas from "$lib/components/canvas.svelte";
   
   let canvas;
