@@ -18,11 +18,11 @@
     ],
     "Assosiations": [
         {
-            "Class1": "Class 1",
+            "Class 1": "Class 1",
             "Modifiers": ["head:open","line:dashed"]
         },
         {
-            "Class2": "Class 3",
+            "Class 2": "Class 3",
             "Modifiers": ["line:dotted","end:closed-filled"]
         }
     ]
