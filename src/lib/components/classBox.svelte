@@ -1,18 +1,16 @@
 <svelte:options accessors/>
 <script>
     import {createEventDispatcher} from 'svelte';
-    import { faker } from '@faker-js/faker/locale/da';
     const dispatch = createEventDispatcher();
     
-    let title = faker.person.firstName();
-    let attributes = "Attribute";
-    let methods = "Methods";
+    export let title;
+    export let attributes;
+    export let methods;    
+    export let x;
+    export let y;
+
     let width = 100;
     let height = 100;
-    
-    export let x = 0;
-    export let y = 0;
-
     let moving = false;
 	
 	function onMouseDown() {
