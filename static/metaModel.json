@@ -1,0 +1,29 @@
+{
+    "classes":[
+        {
+            "Title": "Class 1",
+            "Attributes": "Attribute 1\nAttribute 2\nAttribute 3",
+            "Methods": "Method 1\nMethod 2\nMethod 3"
+        },
+        {
+            "Title": "Class 2",
+            "Attributes": "Attribute 1\nAttribute 2\nAttribute 3",
+            "Methods": "Method 1\nMethod 2\nMethod 3"
+        },
+        {
+            "Title": "Class 3",
+            "Attributes": "Attribute 1\nAttribute 2\nAttribute 3",
+            "Methods": "Method 1\nMethod 2\nMethod 3"
+        }
+    ],
+    "Assosiations": [
+        {
+            "Class 1": "Class 1",
+            "Modifiers": ["head:open","line:dashed"]
+        },
+        {
+            "Class 2": "Class 3",
+            "Modifiers": ["line:dotted","end:closed-filled"]
+        }
+    ]
+}
