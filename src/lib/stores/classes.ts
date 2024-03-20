@@ -1,12 +1,21 @@
-import { writable } from 'svelte/store';
+import { writable, type Updater } from 'svelte/store';
 
-function createClasses() {
-    const { subscribe, set, update } = writable([]);
+export function createClasses(onchange?: (value: classStoreObject[]) => void){
+    const classes = writable<classStoreObject[]>([]);
+
+    function update(updater: Updater<classStoreObject[]>){
+        classes.update((current) => {
+            const newvalue = updater(current);
+            if(onchange){
+                onchange(newvalue);
+            }
+            return newvalue;
+        });
+    }
 
     return {
-        subscribe,
-        set,
-        update,
+        ...classes,
+        update
     }
 }
 
