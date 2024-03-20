@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
   import ClassButton from "$lib/components/classButton.svelte";
   import Canvas from "$lib/components/canvas.svelte";
   
-  let canvas;
+  let canvas: Canvas;
 
   function handleClick(){
       canvas.handleClick();

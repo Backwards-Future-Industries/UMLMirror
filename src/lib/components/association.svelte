@@ -1,8 +1,8 @@
-<script>
-    let x1 = 0;
-    let y1 = 0;
-    let x2 = 100;
-    let y2 = 100;
+<script lang="ts">
+    let x1: number = 0;
+    let y1: number = 0;
+    let x2: number = 100;
+    let y2: number = 100;
 </script>
 
 

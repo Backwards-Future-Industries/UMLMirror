@@ -3,11 +3,11 @@
     import {createEventDispatcher} from 'svelte';
     const dispatch = createEventDispatcher();
     
-    export let title;
-    export let attributes;
-    export let methods;    
-    export let x;
-    export let y;
+    export let title: string;
+    export let attributes: string;
+    export let methods: string;    
+    export let x:  number;
+    export let y: number;
 
     let width = 100;
     let height = 100;
@@ -18,7 +18,7 @@
         focus();
 	}
 	
-	function onMouseMove(e) {
+	function onMouseMove(e: MouseEvent) {
 		if (moving) {
 			x += e.movementX;
 			y += e.movementY;
