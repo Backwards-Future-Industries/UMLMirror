@@ -1,7 +1,9 @@
 <script lang="ts">
     import { faker } from '@faker-js/faker/locale/da';
     import ClassBox from "./classBox.svelte";
-    import { classes } from "$lib/stores/classes";
+    import { createClasses } from "$lib/stores/classes";
+
+    let classes = createClasses();
 
     let width: number = 1000
     let height: number = 1000;

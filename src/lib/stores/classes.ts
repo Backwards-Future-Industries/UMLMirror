@@ -1,8 +1,9 @@
 import { writable, type Updater } from 'svelte/store';
 
 export function createClasses(onchange?: (value: classStoreObject[]) => void){
+    
     const classes = writable<classStoreObject[]>([]);
-
+    
     function update(updater: Updater<classStoreObject[]>){
         classes.update((current) => {
             const newvalue = updater(current);
@@ -18,5 +19,3 @@ export function createClasses(onchange?: (value: classStoreObject[]) => void){
         update
     }
 }
-
-export const classes = writable([]);
