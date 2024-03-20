@@ -1,6 +1,9 @@
 <svelte:options accessors/>
 <script lang="ts">
     import { classStoreObject } from '$lib/objects/classStoreObject';
+    import { createEventDispatcher } from 'svelte';
+    
+    const dispatch = createEventDispatcher();
     
     export let s: classStoreObject;
 
@@ -24,6 +27,10 @@
 		moving = false;
 	}
 
+    function clicked() {
+        dispatch('clicked', s.getId());
+    }
+
 </script>
 
 
@@ -32,7 +39,7 @@
 <svg>
     <rect x={s.x} y={s.y} width={width} height={height} on:mousedown={onMouseDown} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" class=" hover:cursor-move" />
     <g>
-        <text x={s.x+50} y={s.y+20} text-anchor="middle" font-size="16" font-weight="bold">{s.title}</text>
+        <text on:click={clicked} x={s.x+50} y={s.y+20} text-anchor="middle" font-size="16" font-weight="bold">{s.title}</text>
     </g>
     <line x1={s.x} y1={s.y+30} x2={s.x+100} y2={s.y+30} stroke="black" stroke-width="2" />
     <g>

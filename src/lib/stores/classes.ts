@@ -1,5 +1,6 @@
 import { writable, type Updater } from 'svelte/store';
 import { classStoreObject } from '$lib/objects/classStoreObject';
+import { error } from '@sveltejs/kit';
 
 interface Dictionary {
     [key: string]: classStoreObject;
@@ -31,11 +32,16 @@ export function createClasses(onchange?: (value: Dictionary) => void){
         });
     }
 
-    function get(key: string): classStoreObject | undefined {
+    function get(key: string): classStoreObject {
         let itemValue: classStoreObject | undefined;
         classes.subscribe($classes => {
             itemValue = $classes[key];
         })();
+        if (itemValue === undefined) {
+            error(404, {
+                message: 'Flot klaret, Key not found in the store'
+            });
+        }
         return itemValue;
     }
     

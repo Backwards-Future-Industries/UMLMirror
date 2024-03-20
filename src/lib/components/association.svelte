@@ -1,18 +1,12 @@
 <script lang="ts">
-    import { createClasses } from "$lib/stores/classes";
+    import { classStoreObject } from '$lib/objects/classStoreObject';
 
-    let classes = createClasses();
-
-    export let class1: string;
-    export let class2: string;
-
-    let x1: number | undefined = classes.get(class1)?.x;
-    let y1: number | undefined = classes.get(class1)?.y;
-    let x2: number | undefined = classes.get(class2)?.x;
-    let y2: number | undefined = classes.get(class2)?.y;
+    export let class1: classStoreObject
+    export let class2: classStoreObject
+    
 </script>
 
 
 <svg>
-    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" stroke-width="2" />
+    <line x1={class1.x} y1={class1.y} x2={class2.x} y2={class2.y} stroke="black" stroke-width="2" />
 </svg>
