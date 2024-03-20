@@ -1,19 +1,6 @@
 <script lang="ts">
     
-    let textArea: string = 'class Class {\n' +
-        '    - String name;\n' +
-        '    - Enum type;\n' +
-        '    - String[] attributes;\n' +
-        '    - String[] methods;\n' +
-        '}\n\n' +
-
-        'class Attribute {\n' +
-        '    - String name;\n' +
-        '    - Enum accessModifier;\n' +
-        '    - String dataType;\n' +
-        '}\n\n' +
-
-        'Class ..|> Attribute\n';
+    let textArea: string =  '';
 
 </script>
 
