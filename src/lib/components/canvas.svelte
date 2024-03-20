@@ -1,14 +1,15 @@
 <script>
     import { faker } from '@faker-js/faker/locale/da';
     import ClassBox from "./classBox.svelte";
+    import { classes } from "$lib/stores/classes";
 
     let width = 1000
     let height = 1000;
-    $: classes = [];
 
     export function handleClick(){
         let newClass = new ClassBox({
             target: document.getElementById('diagram'),
+            accessors: true,
             props:{
                 title: faker.person.firstName(), 
                 attributes: "Attributes", 
@@ -16,7 +17,7 @@
                 x: 0, y: 0,
             }
         });
-        classes.push({title: newClass.title, x: newClass.x, y: newClass.y});
+        classes = [...classes, {title: newClass.title, x: newClass.x, y: newClass.y}];
         console.log(classes);
     }
 </script>
