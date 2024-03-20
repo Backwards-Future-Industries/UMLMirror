@@ -16,10 +16,19 @@ export function createIncrementer(){
         incrementer.update(() => value);
     }
 
+    function getString(): string {
+        let value: string = "LoL";
+        incrementer.subscribe($incrementer => {
+            value = $incrementer.toString();
+        })();
+        return value;
+    }
+
     return {
         ...incrementer,
         increment,
         decrement,
-        set
+        set,
+        getString
     }
 }

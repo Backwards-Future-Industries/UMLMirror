@@ -1,4 +1,5 @@
 import { writable, type Updater } from 'svelte/store';
+import { classStoreObject } from '$lib/objects/classStoreObject';
 
 interface Dictionary {
     [key: string]: classStoreObject;
@@ -37,12 +38,21 @@ export function createClasses(onchange?: (value: Dictionary) => void){
         })();
         return itemValue;
     }
+    
+    function getAll(): Dictionary {
+        let allValues: Dictionary = {};
+        classes.subscribe($classes => {
+            allValues = $classes;
+        })();
+        return allValues;
+    }
 
     return {
         ...classes,
         update,
         add,
         remove,
-        get
+        get,
+        getAll
     }
 }
