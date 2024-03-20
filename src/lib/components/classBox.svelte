@@ -1,23 +1,22 @@
-<script>
-    let title = "Title";
-    let attributes = "Attribute";
-    let methods = "Methods";
+<svelte:options accessors/>
+<script lang="ts">
+    import { classStoreObject } from '$lib/objects/classStoreObject';
+    
+    export let s: classStoreObject;
+
     let width = 100;
     let height = 100;
-    
-    let x = 0;
-    let y = 0;
-
     let moving = false;
 	
 	function onMouseDown() {
 		moving = true;
+        focus();
 	}
 	
-	function onMouseMove(e) {
+	function onMouseMove(e: MouseEvent) {
 		if (moving) {
-			x += e.movementX;
-			y += e.movementY;
+			s.x += e.movementX;
+			s.y += e.movementY;
 		}
 	}
 	
@@ -29,26 +28,20 @@
 
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<svg on:mousedown={onMouseDown} class="draggable">
-    <rect x={x} y={y} width={width} height={height} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" />
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<svg>
+    <rect x={s.x} y={s.y} width={width} height={height} on:mousedown={onMouseDown} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" class=" hover:cursor-move" />
     <g>
-        <text x={x+50} y={y+20} text-anchor="middle" font-size="16" font-weight="bold">{title}</text>
+        <text x={s.x+50} y={s.y+20} text-anchor="middle" font-size="16" font-weight="bold">{s.title}</text>
     </g>
-    <line x1={x} y1={y+30} x2={x+100} y2={y+30} stroke="black" stroke-width="2" />
+    <line x1={s.x} y1={s.y+30} x2={s.x+100} y2={s.y+30} stroke="black" stroke-width="2" />
     <g>
-        <text x={x+50} y={y+50} text-anchor="middle" font-size="16" font-weight="bold">{attributes}</text>
+        <text x={s.x+50} y={s.y+50} text-anchor="middle" font-size="16" font-weight="bold">{s.attributes}</text>
     </g>
-    <line x1={x} y1={y+70} x2={x+100} y2={y+70} stroke="black" stroke-width="2" />
+    <line x1={s.x} y1={s.y+70} x2={s.x+100} y2={s.y+70} stroke="black" stroke-width="2" />
     <g>
-        <text x={x+50} y={y+90} text-anchor="middle" font-size="16" font-weight="bold">{methods}</text>
+        <text x={s.x+50} y={s.y+90} text-anchor="middle" font-size="16" font-weight="bold">{s.methods}</text>
     </g>
 </svg>
-
-<style>
-	.draggable {
-		user-select: none;
-		cursor: move;
-    }
-</style>
 
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
