@@ -1,8 +1,15 @@
 <script lang="ts">
-    let x1: number = 0;
-    let y1: number = 0;
-    let x2: number = 100;
-    let y2: number = 100;
+    import { createClasses } from "$lib/stores/classes";
+
+    let classes = createClasses();
+
+    export let class1: string;
+    export let class2: string;
+
+    let x1: number | undefined = classes.get(class1)?.x;
+    let y1: number | undefined = classes.get(class1)?.y;
+    let x2: number | undefined = classes.get(class2)?.x;
+    let y2: number | undefined = classes.get(class2)?.y;
 </script>
 
 
