@@ -1,6 +1,8 @@
 import { writable } from "svelte/store";
 
-export function createIncrementer(){
+export const incrementer = createIncrementer();
+
+function createIncrementer(){
     
     const incrementer = writable<number>(0);
 
