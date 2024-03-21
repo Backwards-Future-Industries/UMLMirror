@@ -1,11 +1,29 @@
 <script lang="ts">
     import type { classStoreObject } from '$lib/objects/classStoreObject';
-    import { createClasses } from '$lib/stores/classes';
+    import { classes } from '$lib/stores/classes';
+    import { onMount, onDestroy } from 'svelte';
 
-    let classes = createClasses();
+    export let id1: string;
+    export let id2: string;
+    
+    $: class1 = classes.get(id1);
+    $: class2 = classes.get(id2);
 
-    export let class1: classStoreObject;
-    export let class2: classStoreObject;
+    onMount(() => {
+        const intervalId = setInterval(() => {
+            console.log("class1: "+class1.x+", "+class1.y+"   class2: "+class2.x+", "+class2.y);
+    }, 5000);
+
+    // Cleanup on component destroy
+        return () => {
+            clearInterval(intervalId);
+        };
+    });
+
+    classes.subscribe((value) => {
+        class1 = value[id1];
+        class2 = value[id2];
+    });
 
 </script>
 

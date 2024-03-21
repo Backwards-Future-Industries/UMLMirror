@@ -2,6 +2,7 @@
 <script lang="ts">
     import { classStoreObject } from '$lib/objects/classStoreObject';
     import { createEventDispatcher } from 'svelte';
+    import { classes } from '$lib/stores/classes';
     
     const dispatch = createEventDispatcher();
     
@@ -20,6 +21,7 @@
 		if (moving) {
 			s.x += e.movementX;
 			s.y += e.movementY;
+            classes.replace(s.getId(), s)
 		}
 	}
 	
