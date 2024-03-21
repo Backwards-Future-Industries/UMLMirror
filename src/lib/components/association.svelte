@@ -1,18 +1,33 @@
 <script lang="ts">
-    import { createClasses } from "$lib/stores/classes";
+    import type { classStoreObject } from '$lib/objects/classStoreObject';
+    import { classes } from '$lib/stores/classes';
+    import { onMount, onDestroy } from 'svelte';
 
-    let classes = createClasses();
+    export let id1: string;
+    export let id2: string;
+    
+    $: class1 = classes.get(id1);
+    $: class2 = classes.get(id2);
 
-    export let class1: string;
-    export let class2: string;
+    onMount(() => {
+        const intervalId = setInterval(() => {
+            console.log("class1: "+class1.x+", "+class1.y+"   class2: "+class2.x+", "+class2.y);
+    }, 5000);
 
-    let x1: number | undefined = classes.get(class1)?.x;
-    let y1: number | undefined = classes.get(class1)?.y;
-    let x2: number | undefined = classes.get(class2)?.x;
-    let y2: number | undefined = classes.get(class2)?.y;
+    // Cleanup on component destroy
+        return () => {
+            clearInterval(intervalId);
+        };
+    });
+
+    classes.subscribe((value) => {
+        class1 = value[id1];
+        class2 = value[id2];
+    });
+
 </script>
 
 
 <svg>
-    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" stroke-width="2" />
+    <line x1={50 + class1.x} y1={50 + class1.y} x2={50 + class2.x} y2={50 + class2.y} stroke="black" stroke-width="2" />
 </svg>
