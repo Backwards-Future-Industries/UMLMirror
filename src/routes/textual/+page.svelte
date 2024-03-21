@@ -1,6 +1,5 @@
 <script>
-    import TextAreaInput from "../../lib/components/textAreaInput.svelte";
-    import "../../app.css";
+    import TextAreaInput from "$lib/components/textAreaInput.svelte";
 
     function testButton() {
         alert("test");
