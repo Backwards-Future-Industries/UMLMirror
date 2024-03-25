@@ -1,4 +1,4 @@
-name: pipeline
+name: master
 on: push
 env:
     docker_username: ${{ github.actor }}
@@ -7,7 +7,7 @@ env:
 
 jobs:
     Docker-image-backend:
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         permissions:
             packages: write
