@@ -20,7 +20,9 @@ jobs:
                   registry: ghcr.io
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
+            - name: replace whitespace with hyphen
+              run: echo "NAME=$(echo ${{github.repository}} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
             - name: Build Docker image
               run: |
-                docker build . --tag ghcr.io/${{ github.repository }}:latest
-                docker push ghcr.io/<your-GitHub-username>/UMLMirror:latest
+                docker build . --tag ghcr.io/${{ env.NAME }}:latest
+                docker push ghcr.io/${{ env.NAME }}:latest
