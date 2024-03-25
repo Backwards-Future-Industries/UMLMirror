@@ -1,38 +1,21 @@
-# create-svelte
+# UMLMirror
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## How to run this project
+The only prerequisite to run this project is to have Docker installed. 
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
+### Pull the docker image 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
 
-# create a new project in my-app
-npm create svelte@latest my-app
+docker pull ghcr.io/backwards-future-industries/umlmirror:latest
+
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
+### Run the image
 ```bash
-npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+docker run -dp 3000:3000 ghcr.io/backwards-future-industries/umlmirror:latest
+
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Open localhost:3000 in your browser
+In the search bar at the top of your browser write, `localhost:3000` and hit the Enter-key on your keyboard.
