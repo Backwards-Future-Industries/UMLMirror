@@ -1,6 +1,6 @@
 <script lang="ts">
     
-    let textArea: string =  'classDiagram\n' +
+    export let textArea: string =  'classDiagram\n' +
     '    Animal <|-- Duck\n' +
     '    Animal <|-- Fish\n' +
     '    Animal <|-- Zebra\n' +
