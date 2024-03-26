@@ -30,7 +30,9 @@
 	}
 
     function clicked() {
-        dispatch('clicked', s.getId());
+        dispatch('clicked', {
+            id: s.getId()
+        });
     }
 
 </script>

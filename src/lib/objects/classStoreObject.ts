@@ -18,4 +18,19 @@ export class classStoreObject {
     getId(): string {
         return this.id;
     }
+
+    toJSON(){
+        return{
+            title: this.title,
+            attributes: this.attributes,
+            methods: this.methods,
+            x: this.x,
+            y: this.y,
+            id: this.id
+        }
+    }
+
+    static fromJSON(json: any): classStoreObject {
+        return new classStoreObject(json.title, json.attributes, json.methods, json.x, json.y, json.id);
+    }
 }

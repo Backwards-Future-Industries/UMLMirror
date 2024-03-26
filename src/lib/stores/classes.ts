@@ -1,19 +1,38 @@
 import { writable, type Updater } from 'svelte/store';
 import { classStoreObject } from '$lib/objects/classStoreObject';
 import { error } from '@sveltejs/kit';
+import { browser } from '$app/environment';
+import { incrementer } from './incrementer';
 
 interface Dictionary {
     [key: string]: classStoreObject;
 }
+const initialvalue: Dictionary = getDictionary();
 
-export const classes = createClasses();
+export const classes = createClasses(initialvalue);
 
-function createClasses(){
+function getDictionary(): Dictionary {
+    let rawData: string | null = null;
+    if (browser) {
+        rawData = window.localStorage.getItem('classes');
+    }
+    let parsedData = rawData ? JSON.parse(rawData) : {};
+    let deserializedDictionary: Dictionary = {};
+
+    for (const key in parsedData) {
+        deserializedDictionary[key] = classStoreObject.fromJSON(parsedData[key]);
+    }
+    incrementer.set(Object.keys(deserializedDictionary).length);
+    return deserializedDictionary;
+}
+
+function createClasses(initialValue: Dictionary){
     
-    const classes = writable<Dictionary>({});
+    const classes = writable<Dictionary>(initialValue);
 
     function add(key: string, value: classStoreObject): void {
         classes.update(current => ({ ...current, [key]: value }));
+        save();
     }
 
     function remove(key: string): void {
@@ -22,6 +41,7 @@ function createClasses(){
             delete newState[key];
             return newState;
         });
+        save();
     }
 
     function get(key: string): classStoreObject {
@@ -54,6 +74,13 @@ function createClasses(){
                 [key]: value
             };
         });
+        save();
+    }
+
+    function save(): void {
+        if (browser) {
+            window.localStorage.setItem('classes', JSON.stringify(getAll()));
+        }
     }
 
     return {
