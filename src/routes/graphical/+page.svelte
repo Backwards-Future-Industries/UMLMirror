@@ -6,7 +6,6 @@
   import { associations } from "$lib/stores/associations";
   import { incrementer } from '$lib/stores/incrementer';
   import { classStoreObject } from '$lib/objects/classStoreObject';
-  import { prettify } from '$lib/scripts/graphviz';
 
   function handleClass(){
     incrementer.increment();
@@ -22,9 +21,23 @@
         
       console.log(classes.getAll());
   }
-  function handlePrettify(){
-    prettify(Object.values($classes), $associations);
+  async function handlePrettify(){
+
+    let response = await fetch('api/prettify',{
+      method: 'Post',
+      body: JSON.stringify({
+          classes: classes.stringify(),
+          associations: associations.stringify()
+        }),
+      headers: {
+				'content-type': 'application/json',
+			},
+    });
+
+    let data:string = await response.json();  
+    console.log(data);
   }
+
 </script>
 
 <div id="root" class="flex">

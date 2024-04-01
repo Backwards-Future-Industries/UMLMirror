@@ -1,3 +1,5 @@
+import type { Dictionary } from "$lib/objects/dictionary";
+
 export class classStoreObject {
     title: string;
     attributes: string[];
@@ -38,5 +40,15 @@ export class classStoreObject {
 
     static fromJSON(json: any): classStoreObject {
         return new classStoreObject(json.title, json.attributes, json.methods, json.x, json.y,json.width,json.height, json.id);
+    }
+
+    static fromJSONString(json: string | null): Dictionary {
+        let parsedData = json ? JSON.parse(json) : {};
+        let deserializedDictionary: Dictionary = {};
+
+        for (const key in parsedData) {
+            deserializedDictionary[key] = classStoreObject.fromJSON(parsedData[key]);
+        }
+        return deserializedDictionary;
     }
 }

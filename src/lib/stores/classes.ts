@@ -3,10 +3,8 @@ import { classStoreObject } from '$lib/objects/classStoreObject';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { incrementer } from './incrementer';
+import type { Dictionary } from '$lib/objects/dictionary';
 
-interface Dictionary {
-    [key: string]: classStoreObject;
-}
 const initialvalue: Dictionary = getDictionary();
 
 export const classes = createClasses(initialvalue);
@@ -16,12 +14,7 @@ function getDictionary(): Dictionary {
     if (browser) {
         rawData = window.localStorage.getItem('classes');
     }
-    let parsedData = rawData ? JSON.parse(rawData) : {};
-    let deserializedDictionary: Dictionary = {};
-
-    for (const key in parsedData) {
-        deserializedDictionary[key] = classStoreObject.fromJSON(parsedData[key]);
-    }
+    let deserializedDictionary = classStoreObject.fromJSONString(rawData);
     incrementer.set(Object.keys(deserializedDictionary).length);
     return deserializedDictionary;
 }
@@ -77,9 +70,13 @@ function createClasses(initialValue: Dictionary){
         save();
     }
 
+    function stringify(): string {
+        return JSON.stringify(getAll());
+    }
+
     function save(): void {
         if (browser) {
-            window.localStorage.setItem('classes', JSON.stringify(getAll()));
+            window.localStorage.setItem('classes', stringify());
         }
     }
 
@@ -89,6 +86,7 @@ function createClasses(initialValue: Dictionary){
         remove,
         get,
         getAll,
-        replace
+        replace,
+        stringify
     }
 }

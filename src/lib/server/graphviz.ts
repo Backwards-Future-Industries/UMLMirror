@@ -1,18 +1,22 @@
-import type { associationStoreObject } from '$lib/objects/associationStoreObject';
-import type { classStoreObject } from '$lib/objects/classStoreObject';
+import { associationStoreObject } from '$lib/objects/associationStoreObject';
+import { classStoreObject } from '$lib/objects/classStoreObject';
 import {attribute as att, Digraph, Node, Edge, toDot,} from 'ts-graphviz';
 
-export function prettify(classes:classStoreObject[], associations: associationStoreObject[]) {
+export function prettify(classes:string, associations:string): string {
     const graph = new Digraph('G');
     
-    classes.forEach((n) => {
+    let allClassesDick = classStoreObject.fromJSONString(classes);
+    let allClasses = Object.values(allClassesDick);
+    let allAssociations = associationStoreObject.fromJSONString(associations);
+
+    allClasses.forEach((n) => {
         addNodes(graph, n);
     });
-    associations.forEach((e) => {
+    allAssociations.forEach((e) => {
         addEdges(graph, e);
     });
 
-    console.log(toDot(graph));
+    return toDot(graph);
 }
 
 function addNodes(graph:Digraph, classes:classStoreObject) {
