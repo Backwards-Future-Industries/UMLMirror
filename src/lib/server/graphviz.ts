@@ -1,6 +1,8 @@
 import { associationStoreObject } from '$lib/objects/associationStoreObject';
 import { classStoreObject } from '$lib/objects/classStoreObject';
 import {attribute as att, Digraph, Node, Edge, toDot,} from 'ts-graphviz';
+import { toStream } from 'ts-graphviz/adapter';
+import { exec } from 'child_process';
 
 export function prettify(classes:string, associations:string): string {
     const graph = new Digraph('G');
@@ -16,7 +18,23 @@ export function prettify(classes:string, associations:string): string {
         addEdges(graph, e);
     });
 
-    return toDot(graph);
+    let dotString = toDot(graph);
+    let dotComand = `echo ${dotString} | dot -Tplain`;
+    let result = "";
+
+    exec(dotComand, (error, stdout, stderr) => {
+        if (error) {
+            console.error("Error", error.message);
+            return;
+        }
+        if (stderr) {
+            console.error("Stderr",stderr);
+            return;
+        }
+        result = stdout;
+    });
+
+    return result;
 }
 
 function addNodes(graph:Digraph, classes:classStoreObject) {

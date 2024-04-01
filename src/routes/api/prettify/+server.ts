@@ -4,8 +4,9 @@ import { prettify } from '$lib/server/graphviz';
 
 export const POST: RequestHandler = async ({ request }) => {
 
-    const { classes, associations } = await request.json();
+    let { classes, associations } = await request.json();
 
-    const result = prettify(classes, associations);
-    return json(result);
+    let result = prettify(classes, associations);
+
+    return json({result: result});
 };

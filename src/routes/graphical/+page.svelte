@@ -36,8 +36,8 @@
 
     let data:string = await response.json();  
     console.log(data);
-  }
 
+  }
 </script>
 
 <div id="root" class="flex">
