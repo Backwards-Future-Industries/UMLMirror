@@ -8,7 +8,10 @@ COPY . .
 RUN npm run build && npm prune --production
 
 FROM alpine
-RUN apk add --update nodejs npm
+RUN apk add --update --no-cache \ 
+            nodejs npm \
+            graphviz \
+            ttf-freefont
 WORKDIR /app
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/
