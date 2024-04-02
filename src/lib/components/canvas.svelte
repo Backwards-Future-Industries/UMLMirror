@@ -26,7 +26,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg id="diagram"  class="flex" width={width} height={height}>
     {#each $associations as association}
-        <Association id1={association.id1} id2={association.id2} />
+        <Association id1={association.from} id2={association.to} />
     {/each}
     {#each allClasses as box}
         <ClassBox s={box} on:clicked={focused} />

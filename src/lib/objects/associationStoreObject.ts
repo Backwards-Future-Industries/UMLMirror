@@ -1,17 +1,17 @@
 export class associationStoreObject {
-    id1: string;
-    id2: string;
+    from: string;
+    to: string;
     
     constructor(id1: string, id2: string){
-        this.id1 = id1;
-        this.id2 = id2;
+        this.from = id1;
+        this.to = id2;
         
     }
 
     toJSON(){
         return{
-            id1: this.id1,
-            id2: this.id2
+            id1: this.from,
+            id2: this.to
         }
     }
 
