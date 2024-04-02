@@ -8,8 +8,6 @@
     
     export let s: classStoreObject;
 
-    let width = 100;
-    let height = 100;
     let moving = false;
 	
 	function onMouseDown() {
@@ -41,7 +39,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg>
-    <rect x={s.x} y={s.y} width={width} height={height} on:mousedown={onMouseDown} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" class=" hover:cursor-move" />
+    <rect x={s.x} y={s.y} width={s.width} height={s.height} on:mousedown={onMouseDown} fill="none" stroke="black" stroke-width="2" rx="10" ry="10" class=" hover:cursor-move" />
     <g>
         <text on:click={clicked} x={s.x+50} y={s.y+20} text-anchor="middle" font-size="16" font-weight="bold">{s.title}</text>
     </g>

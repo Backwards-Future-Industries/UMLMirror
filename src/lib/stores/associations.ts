@@ -13,13 +13,8 @@ function getArray(): associationStoreObject[] {
     if (browser) {
         rawData = window.localStorage.getItem('associations');
     }
-    let parsedData: associationStoreObject[]  = rawData ? JSON.parse(rawData) : [];
-    let deserializedArray: associationStoreObject[] = [];
-
     
-    deserializedArray = parsedData.map((item: any) => associationStoreObject.fromJSON(item));
-    
-    return deserializedArray;
+    return associationStoreObject.fromJSONString(rawData);
 }
 
 function createAssociations(initialValue: associationStoreObject[]){
@@ -50,9 +45,13 @@ function createAssociations(initialValue: associationStoreObject[]){
         return allValues;
     }
 
+    function stringify(): string {
+        return JSON.stringify(getAll())
+    }
+
     function save(): void {
         if (browser) {
-            window.localStorage.setItem('associations', JSON.stringify(getAll()));
+            window.localStorage.setItem('associations',stringify());
         }
     }
 
@@ -61,5 +60,6 @@ function createAssociations(initialValue: associationStoreObject[]){
         add,
         get,
         getAll,
+        stringify
     }
 }
