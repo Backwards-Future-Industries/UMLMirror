@@ -80,6 +80,20 @@ function createClasses(initialValue: Dictionary){
         }
     }
 
+    function updateFromDotString(dotString:string):void{
+        let allLines = dotString.split('\n')
+
+        let matchingLines = allLines.filter(line => line.includes('node'))
+        
+        for(let line of matchingLines){
+            let lineSplit = line.split(/\s+/);
+            let klasse = get(lineSplit[1]).clone()
+            klasse.x = Number(lineSplit[2]) * 72
+            klasse.y = Number(lineSplit[3]) * 72
+            replace(klasse.getId(),klasse)
+        }
+    }
+
     return {
         ...classes,
         add,
@@ -87,6 +101,7 @@ function createClasses(initialValue: Dictionary){
         get,
         getAll,
         replace,
-        stringify
+        stringify,
+        updateFromDotString
     }
 }

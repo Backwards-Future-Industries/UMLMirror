@@ -21,6 +21,10 @@ export class classStoreObject {
         this.height = height;
     }
 
+    clone(): classStoreObject{
+        return new classStoreObject(this.title, this.attributes, this.methods, this.x, this.y, this.width, this.height, this.id);
+    }
+
     getId(): string {
         return this.id;
     }

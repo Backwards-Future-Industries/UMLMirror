@@ -37,6 +37,8 @@
     let {result} = await response.json();  
     console.log(result);
 
+    classes.updateFromDotString(result)
+
   }
 </script>
 

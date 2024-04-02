@@ -10,13 +10,13 @@ export class associationStoreObject {
 
     toJSON(){
         return{
-            id1: this.from,
-            id2: this.to
+            from: this.from,
+            to: this.to
         }
     }
 
     static fromJSON(json: any): associationStoreObject {
-        return new associationStoreObject(json.id1, json.id2);
+        return new associationStoreObject(json.from, json.to);
     }
 
     static fromJSONString(json: string | null): associationStoreObject[] {
