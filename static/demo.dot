@@ -13,9 +13,7 @@ digraph {
                 <tr>
                     <td align="left" port="methods">+ method1(): return_type<br/>+ method2(param: type): return_type</td>
                 </tr>
-            </table>
-        >
-    ];
+            </table>>];
 
     OtherClass [
         label=<
