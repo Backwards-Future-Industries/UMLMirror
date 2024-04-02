@@ -34,8 +34,8 @@
 			},
     });
 
-    let data:string = await response.json();  
-    console.log(data);
+    let {result} = await response.json();  
+    console.log(result);
 
   }
 </script>
