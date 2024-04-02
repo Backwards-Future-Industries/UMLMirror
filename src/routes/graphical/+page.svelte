@@ -23,7 +23,7 @@
   }
   async function handlePrettify(){
 
-    let response = await fetch('api/prettify',{
+    let response = await fetch('api/graphviz/prettify',{
       method: 'Post',
       body: JSON.stringify({
           classes: classes.stringify(),
@@ -40,6 +40,7 @@
     classes.updateFromDotString(result)
 
   }
+
 </script>
 
 <div id="root" class="flex">
