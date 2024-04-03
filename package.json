@@ -21,6 +21,5 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"ts-graphviz": "^2.1.0"
 	}
 }
