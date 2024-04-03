@@ -1,32 +1,6 @@
 <script lang="ts">
     
-    export let textArea: string =  'classDiagram\n' +
-    '    Animal <|-- Duck\n' +
-    '    Animal <|-- Fish\n' +
-    '    Animal <|-- Zebra\n' +
-    '\n' +
-    'class Animal{\n' +
-    '    +int age\n' +
-    '    +String gender\n' +
-    '    Animal: +isMammal()\n' +
-    '    Animal: +mate()\n' +
-    '} \n' +
-    '\n' +
-    'class Duck{\n' +
-    '    +String beakColor\n' +
-    '    +swim()\n' +
-    '    +quack()\n' +
-    '}\n' +
-    '\n' +
-    'class Fish{\n' +
-    '    -int sizeInFeet\n' +
-    '    -canEat()\n' +
-    '}\n' +
-    '\n' +
-    'class Zebra{\n' +
-    '    +bool is_wild\n' +
-    '    +run()\n' +
-    '}';
+    export let textArea: string =  '';
 
 </script>
 
