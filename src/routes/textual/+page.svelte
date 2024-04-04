@@ -3,26 +3,6 @@
 
     let diagramText: string = "";
 
-    function generateExampleText(){
-        diagramText =  "class: Person {" +
-            "\nat:"+
-            "\n\"- name: String\"" +
-            "\n\"- age: int\"" +
-            "\nme:"+
-            "\n\"+ getName(): String\"" +
-            "\n\"+ getAge(): int\"" +
-            "\n}" +
-            "\n\n" + 
-            "class: Dog {" +
-            "\nat:"+
-            "\n\"- name: String\"" +
-            "\n\"- age: int\"" +
-            "\nme:"+
-            "\n\"+ getName(): String\"" +
-            "\n\"+ getAge(): int\"" +
-            "\n}";
-    }
-
     function extractLines(textBlock: string): string[] {
         
         return textBlock.split('\n')
@@ -62,7 +42,6 @@
         console.log(classes);
     }
 
-
     function createDiagram() {
         consoleLogProcessedInput();
     }
@@ -71,7 +50,4 @@
 
 <div class="flex flex-row relative top-0 left-0">
     <TextAreaInput bind:textArea={diagramText} on:click={createDiagram}/>
-    <button on:click={generateExampleText} class=" bg-base-400 hover:bg-base-600 text-white font-bold h-24 w-24">
-        example input
-    </button>
 </div>
