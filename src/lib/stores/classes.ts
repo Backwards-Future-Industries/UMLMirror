@@ -1,5 +1,5 @@
 import { writable, type Updater } from 'svelte/store';
-import { classStoreObject } from '$lib/objects/classStoreObject';
+import { xClass } from '$lib/objects/xClass';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { incrementer } from './incrementer';
@@ -14,7 +14,7 @@ function getDictionary(): Dictionary {
     if (browser) {
         rawData = window.localStorage.getItem('classes');
     }
-    let deserializedDictionary = classStoreObject.fromJSONString(rawData);
+    let deserializedDictionary = xClass.fromJSONString(rawData);
     incrementer.set(Object.keys(deserializedDictionary).length);
     return deserializedDictionary;
 }
@@ -23,7 +23,7 @@ function createClasses(initialValue: Dictionary){
     
     const classes = writable<Dictionary>(initialValue);
 
-    function add(key: string, value: classStoreObject): void {
+    function add(key: string, value: xClass): void {
         classes.update(current => ({ ...current, [key]: value }));
         save();
     }
@@ -37,8 +37,8 @@ function createClasses(initialValue: Dictionary){
         save();
     }
 
-    function get(key: string): classStoreObject {
-        let itemValue: classStoreObject | undefined;
+    function get(key: string): xClass {
+        let itemValue: xClass | undefined;
         classes.subscribe($classes => {
             itemValue = $classes[key];
         })();
@@ -56,7 +56,7 @@ function createClasses(initialValue: Dictionary){
         return allValues;
     }
 
-    function replace(key: string, value: classStoreObject): void {
+    function replace(key: string, value: xClass): void {
         classes.update(current => {
             if (current[key] === undefined) {
                 error(404, `Flot klaret. Key ${key} not found in the store. ${JSON.stringify(getAll())}`);
