@@ -15,6 +15,6 @@ interface xclass{
 }
 
 interface association{
-    from: xclass
-    to: xclass
+    from: string
+    to: string
 }
