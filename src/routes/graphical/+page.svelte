@@ -1,22 +1,14 @@
 <script lang="ts">
   import Button from "$lib/components/button.svelte";
   import Canvas from "$lib/components/canvas.svelte";
-  import { faker } from '@faker-js/faker/locale/da';
   import { classes } from "$lib/stores/classes";
   import { associations } from "$lib/stores/associations";
   import { incrementer } from '$lib/stores/incrementer';
-  import { classStoreObject } from '$lib/objects/classStoreObject';
+  import { xClass } from '$lib/objects/xClass';
 
   function handleClass(){
     incrementer.increment();
-      let newClass = new classStoreObject(
-        faker.person.firstName(), 
-        ["Attributes"], 
-        ["Methods"],
-        0, 0,
-        100,100,
-        incrementer.getString()
-      );
+      let newClass = new xClass(incrementer.getString());
       classes.add(incrementer.getString(), newClass);
         
       console.log(classes.getAll());

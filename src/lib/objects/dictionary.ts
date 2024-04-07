@@ -1,5 +1,5 @@
-import { classStoreObject } from '$lib/objects/classStoreObject';
+import { xClass } from '$lib/objects/xClass';
 
 export interface Dictionary {
-    [key: string]: classStoreObject;
+    [key: string]: xClass;
 }
