@@ -1,33 +1,33 @@
 import { writable, type Updater } from 'svelte/store';
-import { associationStoreObject } from '$lib/objects/associationStoreObject';
+import { xAssociation } from '$lib/objects/xAssociation';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 
 
-const initialvalue: associationStoreObject[] = getArray();
+const initialvalue: xAssociation[] = getArray();
 
 export const associations = createAssociations(initialvalue);
 
-function getArray(): associationStoreObject[] {
+function getArray(): xAssociation[] {
     let rawData: string | null = null;
     if (browser) {
         rawData = window.localStorage.getItem('associations');
     }
     
-    return associationStoreObject.fromJSONString(rawData);
+    return xAssociation.fromJSONString(rawData);
 }
 
-function createAssociations(initialValue: associationStoreObject[]){
+function createAssociations(initialValue: xAssociation[]){
     
-    const associations = writable<associationStoreObject[]>(initialValue);
+    const associations = writable<xAssociation[]>(initialValue);
 
-    function add(value: associationStoreObject): void {
+    function add(value: xAssociation): void {
         associations.update(current => ([...current, value ]));
         save();
     }
 
-    function get(index: number): associationStoreObject {
-        let association: associationStoreObject | undefined;
+    function get(index: number): xAssociation {
+        let association: xAssociation | undefined;
         associations.subscribe($associations => {
             association = $associations[index];
         })();
@@ -37,8 +37,8 @@ function createAssociations(initialValue: associationStoreObject[]){
         return association;
     }
     
-    function getAll(): associationStoreObject[] {
-        let allValues: associationStoreObject[] = [];
+    function getAll(): xAssociation[] {
+        let allValues: xAssociation[] = [];
         associations.subscribe($associations => {
             allValues = $associations;
         })();

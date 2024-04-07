@@ -1,5 +1,5 @@
-import { associationStoreObject } from '$lib/objects/associationStoreObject';
-import { classStoreObject } from '$lib/objects/classStoreObject';
+import { xAssociation } from '$lib/objects/xAssociation';
+import { xClass } from '$lib/objects/xClass';
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 
@@ -38,9 +38,9 @@ export function generateSVG(classes:string, associations:string):string{
 }
 
 function createDotStringAndFile(classes: string, associations: string, svg:boolean=false):void {
-    let allClassesDick = classStoreObject.fromJSONString(classes);
+    let allClassesDick = xClass.fromJSONString(classes);
     let allClasses = Object.values(allClassesDick);
-    let allAssociations = associationStoreObject.fromJSONString(associations);
+    let allAssociations = xAssociation.fromJSONString(associations);
 
     let dotString = "digraph G {\n";
 
@@ -68,28 +68,30 @@ function createDotStringAndFile(classes: string, associations: string, svg:boole
     }
 }
 
-function addNodes(klasse:classStoreObject): string {
-    return `\t${klasse.getId()} [shape=box,width=${klasse.width/72},height=${klasse.height/72}];\n`;
+function addNodes(xClass:xClass): string {
+    return `\t${xClass.getId()} [shape=box,width=${xClass.width/72},height=${xClass.height/72}];\n`;
 }
 
-function addNodesSVG(klasse: classStoreObject):string{
-    return`\n${klasse.getId()}[
+function addNodesSVG(xClass: xClass):string{
+    return`\n${xClass.getId()}[
         label=<
             <table border="0" cellborder="1" cellspacing="0" width="auto">
                 <tr>
-                    <td bgcolor="lightgrey"><b>${klasse.title}</b></td>
+                    <td bgcolor="lightgrey"><b>${xClass.name}</b></td>
                 </tr>
                 <tr>
-                    <td align="left" port="attributes">${getTableString(klasse.attributes)}</td>
+                    <td align="left" port="attributes">${getTableString(xClass.attributes)}</td>
                 </tr>
                 <tr>
-                    <td align="left" port="methods">${getTableString(klasse.methods)}</td>
+                    <td align="left" port="methods">${getTableString(xClass.methods)}</td>
                 </tr>
             </table>>];`
 }
 
-function getTableString(list: string[]):string{
+function getTableString(listobject: data):string{
 
+    let list = listobject.value
+    
     let result = ""
 
     list.forEach((value,index,array)=>{
@@ -104,6 +106,6 @@ function getTableString(list: string[]):string{
     return result
 }
 
-function addEdges(association:associationStoreObject): string {
-    return `\t${association.from} -> ${association.to};\n`;
+function addEdges(xAssociation:xAssociation): string {
+    return `\t${xAssociation.from} -> ${xAssociation.to};\n`;
 }
