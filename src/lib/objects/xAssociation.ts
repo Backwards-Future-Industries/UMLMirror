@@ -1,4 +1,4 @@
-export class xAssociation {
+export class xAssociation implements association {
     from: string;
     to: string;
     
