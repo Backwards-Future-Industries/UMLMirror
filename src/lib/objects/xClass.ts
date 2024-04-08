@@ -7,19 +7,19 @@ export class xClass implements xClass {
     methods: method;
     x: number;
     y: number;
-    width: number;
-    height: number;
+    private width: number;
+    private height: number;
     private id: string;
     
     constructor(id: string, name?:string, attributes?:attribute, methods?:method, x?:number, y?:number, width?: number, height?: number){
         this.id = id;
         this.name = name ?? faker.person.firstName();
-        this.attributes = attributes ?? {value: ['Attributes']};
-        this.methods = methods ?? {value:['Methods']};
+        this.attributes = attributes ?? {value: ['+ attribute1:type','- attribute2:type']};
+        this.methods = methods ?? {value:['+ operation1(params):returnType','- operation2(params)','- operation3(params)']};
         this.x = x ?? 0;
         this.y = y ?? 0;
-        this.width = width ?? 100;
-        this.height = height ?? 100;
+        this.width = width ?? this.getWidth();
+        this.height = height ?? this.getHeight();
     }
 
     clone(): xClass{
@@ -28,6 +28,39 @@ export class xClass implements xClass {
 
     getId(): string {
         return this.id;
+    }
+
+    getTotalLines(): number{
+        return 1 + this.getAttributeLines() + this.getMethodLines()
+    }
+
+    getAttributeLines():number{
+        return this.attributes.value.length
+    }
+
+    getMethodLines():number{
+        return this.methods.value.length
+    }
+
+    getWidth(){
+        let longestString = this.name.length
+
+        this.attributes.value.forEach((value)=>{
+            if(value.length > longestString){
+                longestString = value.length
+            }
+        })
+        this.methods.value.forEach((value)=>{
+            if(value.length > longestString){
+                longestString = value.length
+            }
+        })
+
+        return longestString * 10
+    }   
+
+    getHeight(): number{
+        return 20* this.getTotalLines()
     }
 
     toJSON(){

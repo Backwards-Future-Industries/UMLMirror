@@ -16,5 +16,5 @@
 
 
 <svg>
-    <line x1={50 + class1.x} y1={50 + class1.y} x2={50 + class2.x} y2={50 + class2.y} stroke="black" stroke-width="2" />
+    <line x1={class1.x + class1.getWidth()/2} y1={class1.y + class1.getHeight()} x2={class2.x + class2.getWidth()/2} y2={class2.y+ class2.getHeight()} stroke="black" stroke-width="2" />
 </svg>
