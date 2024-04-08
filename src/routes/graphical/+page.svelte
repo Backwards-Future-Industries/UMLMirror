@@ -5,6 +5,7 @@
   import { associations } from "$lib/stores/associations";
   import { incrementer } from '$lib/stores/incrementer';
   import { xClass } from '$lib/objects/xClass';
+  import { focus } from '$lib/stores/focus'
 
   function handleClass(){
     incrementer.increment();
@@ -39,6 +40,11 @@
   <div class="bg-base-200 rounded-[15px] border-solid border-base-400 border-[5px] w-[263px] h-[428px] relative flex flex-col items-center justify-start">
     <Button name="Class" on:click={handleClass}/>
     <Button name="Prettify" on:click={handlePrettify}/>
+    {#if $focus != '0'}
+    <p>Focus is on: {classes.get($focus).name}</p>
+    {:else}
+    <p>There is no class in focus</p>
+    {/if}
   </div>
   <Canvas/>
 </div>
