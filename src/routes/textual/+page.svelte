@@ -16,14 +16,15 @@
     }
 
     function extractClass(classText: string) {
-        const classNameRegex: RegExp = /class:\s*(\w+)/;
-        const classNameMatch = classText.match(classNameRegex);
-        const className: string | null = classNameMatch ? classNameMatch[1] : null;
+        
+        let classNameRegex: RegExp = /class:\s*(\w+)/;
+        let classNameMatch = classText.match(classNameRegex);
+        let className: string = classNameMatch ? classNameMatch[1] : "Title";
 
         // Splitting the class text into attributes and methods
-        const [_, atSection, meSection] = classText.split(/(?:\n\s*at:\s*\n|\n\s*me:\s*\n)/);
-        const attributes: string[] = atSection ? extractLines(atSection) : [];
-        const methods: string[] = meSection ? extractLines(meSection) : [];
+        let [_, atSection, meSection] = classText.split(/(?:\n\s*at:\s*\n|\n\s*me:\s*\n)/);
+        let attributes: string[] = atSection ? extractLines(atSection) : [];
+        let methods: string[] = meSection ? extractLines(meSection) : [];
 
         return {
             className,
@@ -33,11 +34,12 @@
     }
 
     function consoleLogProcessedInput() {
+        
         // Split the entire text by class definitions
-        const classRegex: RegExp = /class:\s*\w+\s*{[\s\S]*?}\n?/g;
-        const classMatches = [...diagramText.matchAll(classRegex)];
+        let classRegex: RegExp = /class:\s*\w+\s*{[\s\S]*?}\n?/g;
+        let classMatches = [...diagramText.matchAll(classRegex)];
 
-        const classes = classMatches.map(match => extractClass(match[0]));
+        let classes = classMatches.map(match => extractClass(match[0]));
 
         console.log(classes);
     }
