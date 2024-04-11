@@ -4,7 +4,8 @@
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
     
-    let diagramText: string = "";
+    let classAreaText: string = "";
+    let associationAreaText: string = "";
 
     async function handleGenSVG(){
         let response = await fetch('api/graphviz/gensvg',{
@@ -43,12 +44,13 @@
 
     function createDiagram() {
         console.log(classes.getAll());
+        console.log(associations.getAll());
     }
 
 </script>
 
 <div class="flex flex-row relative top-0 left-0">
-    <TextAreaInput bind:textArea={diagramText} on:click={createDiagram}/>
+    <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={createDiagram}/>
     <div>
         <button on:click={handleGenSVG} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
             generate SVG
