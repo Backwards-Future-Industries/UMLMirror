@@ -1,55 +1,58 @@
 <script lang="ts">
+    import { writable } from "svelte/store";
     import TextAreaInput from "$lib/components/textAreaInput.svelte";
-
+    import { classes } from "$lib/stores/classes";
+    import { associations } from "$lib/stores/associations";
+    
     let diagramText: string = "";
 
-    function extractLines(textBlock: string): string[] {
+    async function handleGenSVG(){
+        let response = await fetch('api/graphviz/gensvg',{
+        method: 'Post',
+        body: JSON.stringify({
+            classes: classes.stringify(),
+            associations: associations.stringify()
+            }),
+        headers: {
+                    'content-type': 'application/json',
+                },
+        });
+
+        let {result} = await response.json();
         
-        return textBlock.split('\n')
-                  .filter(line => line.trim() !== '' && line.trim() !== '}')
-                  .map(line => {
-                    if (line.startsWith("\"") && line.endsWith("\"")) {
-                      line = line.substring(1, line.length - 1);
-                    }
-                    return line;
-                  });
+        updateSVG(result); 
+
     }
 
-    function extractClass(classText: string) {
+    function updateSVG(svgString: string){
+        let svg = document.getElementById("generatedSVG");
+        let searchString = '<svg w';
+        let startIndex = svgString.indexOf(searchString);
+
+        // If the substring is found, extract from that point onwards
+        if (startIndex !== -1) {
+            let cleanedString = svgString.substring(startIndex);
+            console.log(cleanedString);
+            if (svg) {
+                svg.innerHTML = cleanedString;
+            }
+        } 
+
         
-        let classNameRegex: RegExp = /class:\s*(\w+)/;
-        let classNameMatch = classText.match(classNameRegex);
-        let className: string = classNameMatch ? classNameMatch[1] : "Title";
-
-        // Splitting the class text into attributes and methods
-        let [_, atSection, meSection] = classText.split(/(?:\n\s*at:\s*\n|\n\s*me:\s*\n)/);
-        let attributes: string[] = atSection ? extractLines(atSection) : [];
-        let methods: string[] = meSection ? extractLines(meSection) : [];
-
-        return {
-            className,
-            attributes,
-            methods
-        };
-    }
-
-    function consoleLogProcessedInput() {
-        
-        // Split the entire text by class definitions
-        let classRegex: RegExp = /class:\s*\w+\s*{[\s\S]*?}\n?/g;
-        let classMatches = [...diagramText.matchAll(classRegex)];
-
-        let classes = classMatches.map(match => extractClass(match[0]));
-
-        console.log(classes);
     }
 
     function createDiagram() {
-        consoleLogProcessedInput();
+        console.log(classes.getAll());
     }
 
 </script>
 
 <div class="flex flex-row relative top-0 left-0">
     <TextAreaInput bind:textArea={diagramText} on:click={createDiagram}/>
+    <div>
+        <button on:click={handleGenSVG} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
+            generate SVG
+        </button>
+        <div id="generatedSVG"></div>
+    </div>
 </div>

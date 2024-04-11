@@ -1,6 +1,12 @@
 <script lang="ts">
-    
+    import { classes } from "$lib/stores/classes";
+
     export let textArea: string =  '';
+
+    function importClasses(){
+        let importedClasses: string = classes.stringify();
+        textArea = importedClasses;
+    }
 
     function generateExampleText(){
         textArea =  "class: Person {" +
@@ -32,8 +38,8 @@
         <button on:click class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
             create diagram
         </button>
-        <button on:click={generateExampleText} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
-            example input
+        <button on:click={importClasses} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
+            import graphical
         </button>
     </div>
     
