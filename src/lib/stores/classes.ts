@@ -4,6 +4,7 @@ import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { incrementer } from './incrementer';
 import type { Dictionary } from '$lib/objects/dictionary';
+import { associations } from './associations';
 
 const initialvalue: Dictionary = getDictionary();
 

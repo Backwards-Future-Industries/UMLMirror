@@ -55,11 +55,20 @@ function createAssociations(initialValue: xAssociation[]){
         }
     }
 
+    function deleteFromKey(key: string): void {
+        associations.update(current => {
+            const newState = current.filter((item) => item.from !== key && item.to !== key);
+            return newState;
+        });
+        save();
+    }
+
     return {
         ...associations,
         add,
         get,
         getAll,
-        stringify
+        stringify,
+        deleteFromKey
     }
 }
