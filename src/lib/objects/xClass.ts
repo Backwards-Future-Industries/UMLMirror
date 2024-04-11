@@ -1,7 +1,7 @@
 import type { Dictionary } from "$lib/objects/dictionary";
 import { faker } from '@faker-js/faker/locale/da';
 
-export class xClass implements xClass {
+export class xClass implements xclass {
     name: string;
     attributes: attribute;
     methods: method;
