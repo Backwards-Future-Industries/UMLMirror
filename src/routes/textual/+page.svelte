@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { writable } from "svelte/store";
     import TextAreaInput from "$lib/components/textAreaInput.svelte";
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
@@ -43,8 +42,8 @@
     }
 
     function createDiagram() {
-        console.log(classes.getAll());
-        console.log(associations.getAll());
+        console.log(JSON.parse(classAreaText));
+        console.log(JSON.parse(associationAreaText));
     }
 
 </script>
