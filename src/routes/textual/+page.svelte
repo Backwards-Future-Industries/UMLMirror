@@ -29,10 +29,8 @@
         let searchString = '<svg w';
         let startIndex = svgString.indexOf(searchString);
 
-        // If the substring is found, extract from that point onwards
         if (startIndex !== -1) {
             let cleanedString = svgString.substring(startIndex);
-            console.log(cleanedString);
             if (svg) {
                 svg.innerHTML = cleanedString;
             }
