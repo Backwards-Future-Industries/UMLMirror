@@ -34,6 +34,11 @@
 
   }
 
+  function deleteClass(){
+    classes.remove($focus);
+    associations.deleteFromKey($focus);
+  }
+
 </script>
 
 <div id="root" class="flex">
@@ -41,10 +46,16 @@
     <Button name="Class" on:click={handleClass}/>
     <Button name="Prettify" on:click={handlePrettify}/>
     {#if $focus != '0'}
-    <p>Focus is on: {classes.get($focus).name}</p>
+      <p class="text-center">Focus is on: {classes.get($focus).name}</p>
     {:else}
-    <p>There is no class in focus</p>
+      <p class="text-center">There is no class in focus</p>
     {/if}
+    {#if $focus != '0'}
+      <Button name='Delete {classes.get($focus).name}' on:click={deleteClass}/>
+    {:else}
+      <p class="text-center">Press a class name to focus</p>
+    {/if}
+
   </div>
   <Canvas/>
 </div>
