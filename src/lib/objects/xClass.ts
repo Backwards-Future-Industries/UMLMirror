@@ -1,7 +1,7 @@
 import type { Dictionary } from "$lib/objects/dictionary";
 import { faker } from '@faker-js/faker/locale/da';
 
-export class xClass implements xClass {
+export class xClass implements xclass {
     name: string;
     attributes: attribute;
     methods: method;
@@ -61,6 +61,15 @@ export class xClass implements xClass {
 
     getHeight(): number{
         return 20* this.getTotalLines()
+    }
+
+    updateMethodsFromHTML(text:string){
+        let lines: string[] = text.split(/\r?\n/);
+        this.methods.value = lines;
+    }
+    updateAttributesFromHTML(text:string){
+        let lines: string[] = text.split(/\r?\n/);
+        this.attributes.value = lines;
     }
 
     toJSON(){

@@ -69,7 +69,7 @@ function createDotStringAndFile(classes: string, associations: string, svg:boole
 }
 
 function addNodes(xClass:xClass): string {
-    return `\t${xClass.getId()} [shape=box,width=${xClass.width/72},height=${xClass.height/72}];\n`;
+    return `\t${xClass.getId()} [shape=box,width=${xClass.getWidth()/72},height=${xClass.getHeight()/72}];\n`;
 }
 
 function addNodesSVG(xClass: xClass):string{
