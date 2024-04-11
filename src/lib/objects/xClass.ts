@@ -63,15 +63,6 @@ export class xClass implements xclass {
         return 20* this.getTotalLines()
     }
 
-    updateMethodsFromHTML(text:string){
-        let lines: string[] = text.split(/\r?\n/);
-        this.methods.value = lines;
-    }
-    updateAttributesFromHTML(text:string){
-        let lines: string[] = text.split(/\r?\n/);
-        this.attributes.value = lines;
-    }
-
     toJSON(){
         return{
             id: this.id,

@@ -14,7 +14,6 @@
 
 </script>
 
-
 <svg>
     <line x1={class1.x + class1.getWidth()/2} y1={class1.y + class1.getHeight()} x2={class2.x + class2.getWidth()/2} y2={class2.y+ class2.getHeight()} stroke="black" stroke-width="2" />
 </svg>

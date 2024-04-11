@@ -102,6 +102,7 @@ function createClasses(initialValue: Dictionary){
         getAll,
         replace,
         stringify,
-        updateFromDotString
+        updateFromDotString,
+        save
     }
 }
