@@ -35,8 +35,6 @@
 
 </script>
 
-
-
 <div class="flex flex-col h-screen">
     <textarea id="classText" class="resize-none w-96 bg-base-200 pl-3 pt-2 pr-3 font-mono flex-grow h-3/4" spellcheck="false" bind:value={classArea}/>
     <textarea id="associationText" class="resize-none w-96 bg-base-200 pl-3 pt-2 pr-3 font-mono flex-grow h-1/4" spellcheck="false" bind:value={associationArea}/>

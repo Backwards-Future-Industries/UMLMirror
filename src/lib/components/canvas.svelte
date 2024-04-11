@@ -3,7 +3,6 @@
     import Association from './association.svelte';
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
-    import { focus } from "$lib/stores/focus";
 
     let width: number = 1000
     let height: number = 1000;
