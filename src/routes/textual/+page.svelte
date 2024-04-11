@@ -5,6 +5,7 @@
     
     let classAreaText: string = "";
     let associationAreaText: string = "";
+    let svgString: String = "<svg></svg>";
 
     async function handleGenSVG(){
         let response = await fetch('api/graphviz/gensvg',{
@@ -19,24 +20,9 @@
         });
 
         let {result} = await response.json();
-        
-        updateSVG(result); 
 
-    }
+        svgString = result; 
 
-    function updateSVG(svgString: string){
-        let svg = document.getElementById("generatedSVG");
-        let searchString = '<svg w';
-        let startIndex = svgString.indexOf(searchString);
-
-        if (startIndex !== -1) {
-            let cleanedString = svgString.substring(startIndex);
-            if (svg) {
-                svg.innerHTML = cleanedString;
-            }
-        } 
-
-        
     }
 
     function createDiagram() {
@@ -52,6 +38,8 @@
         <button on:click={handleGenSVG} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
             generate SVG
         </button>
-        <div id="generatedSVG"></div>
+        <div>
+            {@html svgString}
+        </div>
     </div>
 </div>
