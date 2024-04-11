@@ -32,9 +32,7 @@ export function generateSVG(classes:string, associations:string):string{
         console.error('Error executing command:', error);
     }
 
-    let encodedResult = Buffer.from(result).toString('base64');
-
-    return encodedResult;
+    return result;
 }
 
 function createDotStringAndFile(classes: string, associations: string, svg:boolean=false):void {
