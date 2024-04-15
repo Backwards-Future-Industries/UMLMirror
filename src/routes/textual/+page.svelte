@@ -1,5 +1,6 @@
 <script lang="ts">
     import TextAreaInput from "$lib/components/textAreaInput.svelte";
+    import { onMount } from "svelte";
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
     import { incrementer } from "$lib/stores/incrementer";
@@ -9,6 +10,11 @@
     let classAreaText: string = "";
     let associationAreaText: string = "";
     let svgString: String = "<svg></svg>";
+
+    onMount(() => {
+        generateTextFromStores();
+        handleGenSVG();
+    });
 
     async function handleGenSVG(){
         let response = await fetch('api/graphviz/gensvg',{
@@ -23,11 +29,33 @@
         });
 
         let {result} = await response.json();
+        handlePrettify();
 
         svgString = result; 
 
     }
 
+    //TODO: Move these functions to somewhere in $lib to avoid duplication
+    async function handlePrettify(){
+
+        let response = await fetch('api/graphviz/prettify',{
+            method: 'Post',
+            body: JSON.stringify({
+                classes: classes.stringify(),
+                associations: associations.stringify()
+                }),
+            headers: {
+                        'content-type': 'application/json',
+            },
+        });
+
+        let {result} = await response.json();  
+        console.log(result);
+
+        classes.updateFromDotString(result)
+
+    }
+    
     function updateClasses(classAreaText: string){
         let parsedClasses = JSON.parse(classAreaText);
         let parsedIds = Object.values(parsedClasses).map(obj => obj.id);
@@ -85,9 +113,18 @@
         let currentAssociations = associations.getAll();
         let currentAssocMap = new Map(currentAssociations.map(assoc => [assoc.from + "-" + assoc.to, assoc]));
 
+        //Fetch class Ids
+        let currentClasses = classes.getAll();
+        let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
+
         //TODO: Removel of associations
 
+        //Add new associations
         parsedAssociations.forEach((parsedAssoc: xAssociation) => {
+            //check if parsedAssoc.from and parsedAssoc.to are in classes.getAll() ids
+            if (!currentIds.includes(parsedAssoc.from) || !currentIds.includes(parsedAssoc.to)) {
+                return;
+            }
             let assocKey = parsedAssoc.from + "-" + parsedAssoc.to;
             if (!currentAssocMap.has(assocKey)) {
                 associations.add(parsedAssoc);
@@ -104,6 +141,25 @@
         console.log(JSON.parse(associationAreaText));
 
         handleGenSVG();
+        generateTextFromStores();
+    }
+
+    function generateTextFromStores(){
+        let importedAssociations: string = associations.stringify();
+        associationAreaText = importedAssociations;
+        let filteredClasses= filterFields(classes.getAll());
+        classAreaText = JSON.stringify(filteredClasses,null,1);
+    }
+
+    function filterFields(jsonData: any): any {
+        let filteredData: { [key: string]: any } = {};
+
+        for (const key in jsonData) {
+            const { x, y, width, height, ...rest } = jsonData[key];
+            filteredData[key] = rest;
+        }
+
+        return filteredData;
     }
 
 </script>
@@ -111,8 +167,10 @@
 <div class="flex flex-row relative top-0 left-0">
     <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={updateDiagram}/>
     <div>
-        <div>
-            {@html svgString}
-        </div>
+        {@html svgString}
     </div>
 </div>
+
+
+
+  
