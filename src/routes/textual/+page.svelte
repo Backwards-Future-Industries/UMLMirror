@@ -165,22 +165,12 @@
 </script>
 
 <div class="flex flex-row relative top-0 left-0">
-    <div class="flex flex-col relative top-0 left-0">
-        <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={updateDiagram}/>
-        <div class="flex flex-row">
-            <button on:click={updateDiagram} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 w-48 rounded">
-                Update diagram
-            </button>
-    
-            <button on:click={generateTextFromStores} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 w-48 rounded">
-                Import graphical
-            </button>
-        </div>
-    </div>
+    <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={updateDiagram}/>
     <div>
         {@html svgString}
     </div>
 </div>
+
 
 
   
