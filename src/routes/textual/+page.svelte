@@ -34,8 +34,6 @@
         let currentClasses = classes.getAll();
         let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
 
-        let remvoedIds = new Set();
-
         //Remove removed classes
         currentIds.forEach(id => {
             if (!parsedIds.includes(id)) {
@@ -43,14 +41,13 @@
                 if (idToRemove) {
                     classes.remove(idToRemove);
                     associations.deleteFromKey(id);
-                    remvoedIds.add(id);
                 }
             }
         });
 
         //updates existing classes
         parsedIds.forEach(id => {
-            if (currentIds.includes(id) && !remvoedIds.has(id)) {
+            if (currentIds.includes(id)) {
                 let updatedClass = new xClass(
                     parsedClasses[id].id, 
                     parsedClasses[id].name, 
@@ -83,10 +80,25 @@
 
     }
 
+    function updateAssociations(associationAreaText: string) {
+        let parsedAssociations = JSON.parse(associationAreaText).map((item: any) => new xAssociation(item.from, item.to));
+        let currentAssociations = associations.getAll();
+        let currentAssocMap = new Map(currentAssociations.map(assoc => [assoc.from + "-" + assoc.to, assoc]));
 
-    function createDiagram() {
+        //TODO: Removel of associations
+
+        parsedAssociations.forEach((parsedAssoc: xAssociation) => {
+            let assocKey = parsedAssoc.from + "-" + parsedAssoc.to;
+            if (!currentAssocMap.has(assocKey)) {
+                associations.add(parsedAssoc);
+            }
+        });
+    }
+
+    function updateDiagram() {
         
         updateClasses(classAreaText);
+        updateAssociations(associationAreaText);
 
         console.log(JSON.parse(classAreaText));
         console.log(JSON.parse(associationAreaText));
@@ -97,7 +109,7 @@
 </script>
 
 <div class="flex flex-row relative top-0 left-0">
-    <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={createDiagram}/>
+    <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={updateDiagram}/>
     <div>
         <div>
             {@html svgString}
