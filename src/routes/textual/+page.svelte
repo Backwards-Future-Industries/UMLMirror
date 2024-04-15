@@ -29,6 +29,7 @@
 
     }
 
+    //TODO: Move these functions to somewhere in $lib to avoid duplication
     async function handlePrettify(){
 
         let response = await fetch('api/graphviz/prettify',{
