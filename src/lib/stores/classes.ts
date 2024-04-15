@@ -72,7 +72,7 @@ function createClasses(initialValue: Dictionary){
     }
 
     function stringify(): string {
-        return JSON.stringify(getAll());
+        return JSON.stringify(getAll(),null,1);
     }
 
     function save(): void {

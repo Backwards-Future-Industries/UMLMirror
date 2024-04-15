@@ -1,7 +1,6 @@
 <script lang="ts">
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
-    import { xClass } from "$lib/objects/xClass";
 
     export let classArea: string =  '';
     export let associationArea: string = '';
@@ -10,7 +9,7 @@
         let importedAssociations: string = associations.stringify();
         associationArea = importedAssociations;
         let filteredClasses= filterFields(classes.getAll());
-        classArea = JSON.stringify(filteredClasses);
+        classArea = JSON.stringify(filteredClasses,null,1);
     }
 
     function filterFields(jsonData: any): any {
@@ -22,27 +21,6 @@
         }
 
         return filteredData;
-    }
-
-    //TODO: Rewrite to new format
-    function generateExampleText(){
-        /*textArea =  "class: Person {" +
-            "\nat:"+
-            "\n\"- name: String\"" +
-            "\n\"- age: int\"" +
-            "\nme:"+
-            "\n\"+ getName(): String\"" +
-            "\n\"+ getAge(): int\"" +
-            "\n}" +
-            "\n\n" + 
-            "class: Dog {" +
-            "\nat:"+
-            "\n\"- name: String\"" +
-            "\n\"- age: int\"" +
-            "\nme:"+
-            "\n\"+ getName(): String\"" +
-            "\n\"+ getAge(): int\"" +
-            "\n}";*/
     }
 
 </script>
