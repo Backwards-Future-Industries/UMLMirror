@@ -23,11 +23,32 @@
         });
 
         let {result} = await response.json();
+        handlePrettify();
 
         svgString = result; 
 
     }
 
+    async function handlePrettify(){
+
+        let response = await fetch('api/graphviz/prettify',{
+            method: 'Post',
+            body: JSON.stringify({
+                classes: classes.stringify(),
+                associations: associations.stringify()
+                }),
+            headers: {
+                        'content-type': 'application/json',
+            },
+        });
+
+        let {result} = await response.json();  
+        console.log(result);
+
+        classes.updateFromDotString(result)
+
+    }
+    
     function updateClasses(classAreaText: string){
         let parsedClasses = JSON.parse(classAreaText);
         let parsedIds = Object.values(parsedClasses).map(obj => obj.id);
@@ -85,9 +106,18 @@
         let currentAssociations = associations.getAll();
         let currentAssocMap = new Map(currentAssociations.map(assoc => [assoc.from + "-" + assoc.to, assoc]));
 
+        //Fetch class Ids
+        let currentClasses = classes.getAll();
+        let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
+
         //TODO: Removel of associations
 
+        //Add new associations
         parsedAssociations.forEach((parsedAssoc: xAssociation) => {
+            //check if parsedAssoc.from and parsedAssoc.to are in classes.getAll() ids
+            if (!currentIds.includes(parsedAssoc.from) || !currentIds.includes(parsedAssoc.to)) {
+                return;
+            }
             let assocKey = parsedAssoc.from + "-" + parsedAssoc.to;
             if (!currentAssocMap.has(assocKey)) {
                 associations.add(parsedAssoc);
