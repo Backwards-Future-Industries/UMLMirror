@@ -135,15 +135,46 @@
         console.log(JSON.parse(associationAreaText));
 
         handleGenSVG();
+        generateTextFromStores();
+    }
+
+    function generateTextFromStores(){
+        let importedAssociations: string = associations.stringify();
+        associationAreaText = importedAssociations;
+        let filteredClasses= filterFields(classes.getAll());
+        classAreaText = JSON.stringify(filteredClasses,null,1);
+    }
+
+    function filterFields(jsonData: any): any {
+        let filteredData: { [key: string]: any } = {};
+
+        for (const key in jsonData) {
+            const { x, y, width, height, ...rest } = jsonData[key];
+            filteredData[key] = rest;
+        }
+
+        return filteredData;
     }
 
 </script>
 
 <div class="flex flex-row relative top-0 left-0">
-    <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={updateDiagram}/>
-    <div>
-        <div>
-            {@html svgString}
+    <div class="flex flex-col relative top-0 left-0">
+        <TextAreaInput bind:classArea={classAreaText} bind:associationArea={associationAreaText} on:click={updateDiagram}/>
+        <div class="flex flex-row">
+            <button on:click={updateDiagram} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 w-48 rounded">
+                Update diagram
+            </button>
+    
+            <button on:click={generateTextFromStores} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 w-48 rounded">
+                Import graphical
+            </button>
         </div>
     </div>
+    <div>
+        {@html svgString}
+    </div>
 </div>
+
+
+  
