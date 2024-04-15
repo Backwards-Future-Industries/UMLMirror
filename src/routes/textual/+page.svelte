@@ -58,8 +58,7 @@
         console.log(JSON.parse(classAreaText));
         console.log(JSON.parse(associationAreaText));
 
-        classAreaText = classes.stringify();
-        associationAreaText = associations.stringify();
+        handleGenSVG();
     }
 
 </script>
