@@ -52,10 +52,10 @@
     <textarea id="associationText" class="resize-none w-96 bg-base-200 pl-3 pt-2 pr-3 font-mono flex-grow h-1/4" spellcheck="false" bind:value={associationArea}/>
     <div class="flex-row w-max">
         <button on:click class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
-            create diagram
+            Update diagram
         </button>
         <button on:click={importDiagram} class=" bg-base-400 hover:bg-base-600 text-white font-bold py-2 px-4 rounded">
-            import graphical
+            Import graphical
         </button>
     </div>
     

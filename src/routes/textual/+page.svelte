@@ -34,20 +34,23 @@
         let currentClasses = classes.getAll();
         let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
 
+        let remvoedIds = new Set();
+
         //Remove removed classes
         currentIds.forEach(id => {
             if (!parsedIds.includes(id)) {
-                let keyToRemove = Object.keys(currentClasses).find(key => currentClasses[key].getId() === id);
-                if (keyToRemove) {
-                    classes.remove(keyToRemove);
+                let idToRemove = Object.keys(currentClasses).find(key => currentClasses[key].getId() === id);
+                if (idToRemove) {
+                    classes.remove(idToRemove);
                     associations.deleteFromKey(id);
+                    remvoedIds.add(id);
                 }
             }
         });
 
         //updates existing classes
         parsedIds.forEach(id => {
-            if (currentIds.includes(id)) {
+            if (currentIds.includes(id) && !remvoedIds.has(id)) {
                 let updatedClass = new xClass(
                     parsedClasses[id].id, 
                     parsedClasses[id].name, 
