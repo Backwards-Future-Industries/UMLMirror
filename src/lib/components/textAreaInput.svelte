@@ -14,7 +14,7 @@
     }
 
     function filterFields(jsonData: any): any {
-        const filteredData: { [key: string]: any } = {};
+        let filteredData: { [key: string]: any } = {};
 
         for (const key in jsonData) {
             const { x, y, width, height, ...rest } = jsonData[key];

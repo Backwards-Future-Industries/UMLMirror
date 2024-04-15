@@ -42,6 +42,14 @@ export class xClass implements xclass {
         return this.methods.value.length
     }
 
+    getX(): number{ 
+        return this.x; 
+    }
+
+    getY(): number{ 
+        return this.y; 
+    }
+
     getWidth(){
         let longestString = this.name.length
 
