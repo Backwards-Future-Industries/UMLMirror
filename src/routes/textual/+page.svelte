@@ -1,5 +1,6 @@
 <script lang="ts">
     import TextAreaInput from "$lib/components/textAreaInput.svelte";
+    import { onMount } from "svelte";
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
     import { incrementer } from "$lib/stores/incrementer";
@@ -9,6 +10,11 @@
     let classAreaText: string = "";
     let associationAreaText: string = "";
     let svgString: String = "<svg></svg>";
+
+    onMount(() => {
+        generateTextFromStores();
+        handleGenSVG();
+    });
 
     async function handleGenSVG(){
         let response = await fetch('api/graphviz/gensvg',{
