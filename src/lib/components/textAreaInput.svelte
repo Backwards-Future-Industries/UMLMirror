@@ -1,6 +1,7 @@
 <script lang="ts">
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
+    import { xClass } from "$lib/objects/xClass";
 
     export let classArea: string =  '';
     export let associationArea: string = '';
@@ -8,8 +9,19 @@
     function importDiagram(){
         let importedAssociations: string = associations.stringify();
         associationArea = importedAssociations;
-        let importedClasses: string = classes.stringify();
-        classArea = importedClasses;
+        let filteredClasses= filterFields(classes.getAll());
+        classArea = JSON.stringify(filteredClasses);
+    }
+
+    function filterFields(jsonData: any): any {
+        const filteredData: { [key: string]: any } = {};
+
+        for (const key in jsonData) {
+            const { x, y, width, height, ...rest } = jsonData[key];
+            filteredData[key] = rest;
+        }
+
+        return filteredData;
     }
 
     //TODO: Rewrite to new format

@@ -2,6 +2,8 @@
     import TextAreaInput from "$lib/components/textAreaInput.svelte";
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
+    import { xClass } from "$lib/objects/xClass";
+    import { xAssociation } from "$lib/objects/xAssociation";
     
     let classAreaText: string = "";
     let associationAreaText: string = "";
@@ -25,9 +27,39 @@
 
     }
 
+    function cleanUpClasses(classAreaText: string){
+        let parsedClasses = JSON.parse(classAreaText);
+        let parsedIds = Object.values(parsedClasses).map(obj => obj.id);
+        let currentClasses = classes.getAll();
+        let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
+
+        currentIds.forEach(id => {
+            if (!parsedIds.includes(id)) {
+                let keyToRemove = Object.keys(currentClasses).find(key => currentClasses[key].getId() === id);
+                if (keyToRemove) {
+                    classes.remove(keyToRemove);
+                    associations.deleteFromKey(id);
+                }
+            }
+        });
+    }
+
+    function cleanUpAssociations(associationAreaText: string){
+        //coming soon when associations are updated
+    }
+
+
+
     function createDiagram() {
+        
+        cleanUpClasses(classAreaText);
+        cleanUpAssociations(associationAreaText);
+
         console.log(JSON.parse(classAreaText));
         console.log(JSON.parse(associationAreaText));
+
+        classAreaText = classes.stringify();
+        associationAreaText = associations.stringify();
     }
 
 </script>
