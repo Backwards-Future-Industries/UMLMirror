@@ -1,5 +1,5 @@
 <script>
-    let sampleClass = {
+    let sampleClass = { "1": {
         "name": "Person",
         "attributes": {
         "value": [
@@ -12,6 +12,7 @@
         ]
         },
         "id": "1"
+        }  
     }
 
     let prettyClass = JSON.stringify(sampleClass, null, 1);
@@ -57,8 +58,9 @@
         <div>The textual input works by parsing JSON, looking for the following fields: </div>
         <div class="font-mono">'name','id','attributes' & 'methods'</div>
         <div>The first two are strings, whilst the latter two are arrays[] of strings, 
-            classes are written in the top text area,
-            an example of a simple class can be seen below:</div>
+            classes are written in the top text area, do note that in the current itteration of the tool 
+            a key identical to the id is to be given before the class object.
+            An example of a simple class can be seen below:</div>
         <pre><code>{prettyClass}</code></pre>
         <div class="font-bold py-1">Creating an association</div>
         <div>Associations are created using the Ids of the classes, 
