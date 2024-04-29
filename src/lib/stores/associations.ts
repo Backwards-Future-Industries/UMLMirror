@@ -26,6 +26,15 @@ function createAssociations(initialValue: xAssociation[]){
         save();
     }
 
+    function remove(index: number): void {
+        associations.update(current => {
+            const newState = [...current ];
+            newState.splice(index, 1);
+            return newState;
+        });
+        save();
+    }
+
     function get(index: number): xAssociation {
         let association: xAssociation | undefined;
         associations.subscribe($associations => {
@@ -66,6 +75,7 @@ function createAssociations(initialValue: xAssociation[]){
     return {
         ...associations,
         add,
+        remove,
         get,
         getAll,
         stringify,

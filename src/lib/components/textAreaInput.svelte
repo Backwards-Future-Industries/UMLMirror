@@ -87,7 +87,7 @@
         let currentClasses = classes.getAll();
         let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
 
-        //TODO: Removel of associations
+        removeAssociations(currentAssociations, parsedAssociations);
 
         //Add new associations
         parsedAssociations.forEach((parsedAssoc: xAssociation) => {
@@ -100,6 +100,22 @@
                 associations.add(parsedAssoc);
             }
         });
+    }
+
+    function removeAssociations(currentAssociations: xAssociation[], parsedAssociations: xAssociation[]){
+        let indicesToRemove: number[] = [];
+
+        currentAssociations.forEach((assoc: xAssociation, index: number) => {
+            if (!parsedAssociations.some(parsedAssoc => parsedAssoc.from === assoc.from && parsedAssoc.to === assoc.to)) {
+                indicesToRemove.push(index);
+            }
+        });
+
+        indicesToRemove.reverse();
+
+        for (const index of indicesToRemove) {
+            associations.remove(index);
+        }
     }
 
     function updateDiagram() {
