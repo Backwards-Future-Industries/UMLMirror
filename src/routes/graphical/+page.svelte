@@ -6,6 +6,7 @@
   import { incrementer } from '$lib/stores/incrementer';
   import { xClass } from '$lib/objects/xClass';
   import { focus } from '$lib/stores/focus'
+  import { handlePrettify } from "$lib/logic/graphvizLogic";
 
   function handleClass(){
     incrementer.increment();
@@ -13,25 +14,6 @@
       classes.add(incrementer.getString(), newClass);
         
       console.log(classes.getAll());
-  }
-  async function handlePrettify(){
-
-    let response = await fetch('api/graphviz/prettify',{
-      method: 'Post',
-      body: JSON.stringify({
-          classes: classes.stringify(),
-          associations: associations.stringify()
-        }),
-      headers: {
-				'content-type': 'application/json',
-			},
-    });
-
-    let {result} = await response.json();  
-    console.log(result);
-
-    classes.updateFromDotString(result)
-
   }
 
   function deleteClass(){
