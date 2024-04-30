@@ -5,7 +5,7 @@
   import { associations } from "$lib/stores/associations";
   import { incrementer } from '$lib/stores/incrementer';
   import { xClass } from '$lib/objects/xClass';
-  import { focus } from '$lib/stores/focus'
+  import { classFocus,associationFocus } from '$lib/stores/focuses'
   import { handlePrettify } from "$lib/logic/graphvizLogic";
 
   function handleClass(){
@@ -17,8 +17,12 @@
   }
 
   function deleteClass(){
-    classes.remove($focus);
-    associations.deleteFromKey($focus);
+    classes.remove($classFocus);
+    associations.deleteFromKey($classFocus);
+  }
+  function deleteAssociation(){
+    associations.remove($associationFocus)
+    associationFocus.set(-1)
   }
 
 </script>
@@ -27,16 +31,21 @@
   <div class="bg-base-200 rounded-[15px] border-solid border-base-400 border-[5px] w-[263px] h-[428px] relative flex flex-col items-center justify-start">
     <Button name="Class" on:click={handleClass}/>
     <Button name="Prettify" on:click={handlePrettify}/>
-    {#if $focus != '0'}
-      <p class="text-center">Focus is on: {classes.get($focus).name}</p>
-    {:else}
-      <p class="text-center">There is no class in focus</p>
+    {#if $classFocus == '0' && $associationFocus == -1}
+      <p class="text-center">There is nothing in focus</p>
+      <p class="text-center">Press an element to focus</p>
     {/if}
-    {#if $focus != '0'}
-      <Button name='Delete {classes.get($focus).name}' on:click={deleteClass}/>
-    {:else}
-      <p class="text-center">Press a class name to focus</p>
+    {#if $classFocus != '0'}
+      <p class="text-center">{classes.get($classFocus).name} is highlighted</p>
+      <Button name='Delete {classes.get($classFocus).name}' on:click={deleteClass}/>
     {/if}
+    {#if $associationFocus != -1}
+    <p class="text-center">
+      Association from {classes.get($associations[$associationFocus].from).name} to {classes.get($associations[$associationFocus].to).name} is highlighted 
+    </p>
+    <Button name='Delete this association' on:click={deleteAssociation}/>
+    {/if}
+
 
   </div>
   <Canvas/>

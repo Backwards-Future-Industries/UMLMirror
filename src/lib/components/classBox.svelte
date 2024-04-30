@@ -1,7 +1,7 @@
 <script lang="ts">
     import { xClass } from '$lib/objects/xClass';
     import { classes } from '$lib/stores/classes';
-    import { focus } from '$lib/stores/focus'
+    import { classFocus } from '$lib/stores/focuses'
     import { xAssociation } from '$lib/objects/xAssociation';
     import { associations } from "$lib/stores/associations";
     import DataField from './dataField.svelte'
@@ -30,14 +30,14 @@
 	}
 
     function setfocus() {
-        if($focus != "0" && s.getId() != $focus){
-            let newAssociation = new xAssociation($focus, s.getId());
+        if($classFocus != "0" && s.getId() != $classFocus){
+            let newAssociation = new xAssociation($classFocus, s.getId());
             associations.add(newAssociation);
         }
-        focus.set(s.getId())
+        classFocus.set(s.getId())
     }
     function unfocus(){
-        focus.set('0')
+        classFocus.set('0')
 
         if(titleEdit){
             classes.replace(s.getId(),s)
@@ -57,7 +57,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <svg x={s.x} y={s.y} width={s.getWidth()+4} height={s.getHeight() +4} on:click|stopPropagation={setfocus}>
-    <rect x={2} y={2} width={s.getWidth()} height={s.getHeight()} on:mousedown={onMouseDown}  stroke={$focus == s.getId() ? "mediumslateblue": "black"} stroke-width="2" fill={$focus == s.getId() ? "silver": "ghostwhite"} rx="10" ry="10" class=" hover:cursor-move" />
+    <rect x={2} y={2} width={s.getWidth()} height={s.getHeight()} on:mousedown={onMouseDown}  stroke={$classFocus == s.getId() ? "mediumslateblue": "black"} stroke-width="2" fill={$classFocus == s.getId() ? "silver": "ghostwhite"} rx="10" ry="10" class=" hover:cursor-move" />
     
     <g on:dblclick|stopPropagation={titleDblClick} bind:this={xtitle}>
         <text x={s.getWidth()/2} y={20} text-anchor="middle" font-size="16" font-weight="bold">{s.name}</text>
