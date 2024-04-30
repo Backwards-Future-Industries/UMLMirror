@@ -9,18 +9,18 @@
     import { focus } from '$lib/stores/focus'
     import { xClass } from '$lib/objects/xClass';
 
-function handleClass(){
-    incrementer.increment();
-      let newClass = new xClass(incrementer.getString());
-      classes.add(incrementer.getString(), newClass);
-        
-      console.log(classes.getAll());
-  }
+    function handleClass(){
+        incrementer.increment();
+        let newClass = new xClass(incrementer.getString());
+        classes.add(incrementer.getString(), newClass);
+            
+        console.log(classes.getAll());
+    }
 
-  function deleteClass(){
-    classes.remove($focus);
-    associations.deleteFromKey($focus);
-  }
+    function deleteClass(){
+        classes.remove($focus);
+        associations.deleteFromKey($focus);
+    }
 
 </script>
 
