@@ -40,7 +40,7 @@ function createDotStringAndFile(classes: string, associations: string, svg:boole
     let allClasses = Object.values(allClassesDick);
     let allAssociations = xAssociation.fromJSONString(associations);
 
-    let dotString = 'digraph G {\nrankdir="BT"\n';
+    let dotString = 'digraph G {\n';
 
     if(svg){
         dotString += "node [shape=plaintext];\n"
@@ -48,6 +48,7 @@ function createDotStringAndFile(classes: string, associations: string, svg:boole
             dotString += addNodesSVG(n);
         });
     }else{
+        dotString += 'rankdir="BT"\n';
         allClasses.forEach((n) => {
             dotString += addNodes(n);
         });

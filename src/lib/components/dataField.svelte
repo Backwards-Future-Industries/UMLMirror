@@ -6,12 +6,12 @@
     export let s: xClass
     export let startY: number
     let graphicsElement: SVGGraphicsElement;
-    let DOMRect: DOMRect;
+    let BBox: DOMRect;
     let editText: string = arraytostring(data.value);
     $: editable = false;
 
     function attributeDblClick(){
-        DOMRect = graphicsElement.getBBox();
+        BBox = graphicsElement.getBBox();
         editable = true;
     }
 
@@ -32,22 +32,21 @@
         })
         return result
     }
+
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<g>
+{#if !editable}
     <g on:dblclick|stopPropagation={attributeDblClick} bind:this={graphicsElement}>
         {#each data.value as value, index}
         <text x={5} y={startY+16*index} text-anchor="start" font-size="14" font-family="monospace">{value}</text>
         {/each}
     </g>
-    {#if editable}
-        <foreignObject x={DOMRect.x} y={DOMRect.y} width={DOMRect.width} height={DOMRect.height} on:click|stopPropagation={()=>{}}>
-            <textarea class="w-full h-full bg-green-200 font-mono text-xs resize-none" bind:value={editText}/>
-        </foreignObject>
-    {/if}
-</g>
-
+{:else}
+    <foreignObject x={BBox.x} y={BBox.y} width={BBox.width} height={BBox.height} on:click|stopPropagation={()=>{}}>
+        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" bind:value={editText}/>
+    </foreignObject>
+{/if}
 
 <svelte:window on:click={closeEditor}/>
