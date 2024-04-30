@@ -10,7 +10,7 @@
     });
 
     function handleClick() {
-        handleGenSVG().then(result => svgString = result);;
+        handleGenSVG().then(result => svgString = result);
     }
  
 
