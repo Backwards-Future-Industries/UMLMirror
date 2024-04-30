@@ -68,7 +68,7 @@ export class xClass implements xclass {
     }   
 
     getHeight(): number{
-        return 20* this.getTotalLines()
+        return 20 * this.getTotalLines()
     }
 
     toJSON(){

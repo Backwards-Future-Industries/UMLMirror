@@ -36,18 +36,16 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<g>
+{#if !editable}
     <g on:dblclick|stopPropagation={attributeDblClick} bind:this={graphicsElement}>
         {#each data.value as value, index}
         <text x={5} y={startY+16*index} text-anchor="start" font-size="14" font-family="monospace">{value}</text>
         {/each}
     </g>
-    {#if editable}
-        <foreignObject x={DOMRect.x} y={DOMRect.y} width={DOMRect.width} height={DOMRect.height} on:click|stopPropagation={()=>{}}>
-            <textarea class="w-full h-full bg-green-200 font-mono text-xs resize-none" bind:value={editText}/>
-        </foreignObject>
-    {/if}
-</g>
-
+{:else}
+    <foreignObject x={DOMRect.x} y={DOMRect.y} width={DOMRect.width} height={DOMRect.height} on:click|stopPropagation={()=>{}}>
+        <textarea class="w-full h-full bg-green-200 font-mono text-xs resize-none" bind:value={editText}/>
+    </foreignObject>
+{/if}
 
 <svelte:window on:click={closeEditor}/>

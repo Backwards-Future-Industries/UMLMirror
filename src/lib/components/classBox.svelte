@@ -29,13 +29,12 @@
 		moving = false;
 	}
 
-    function clicked() {
+    function setfocus() {
         if($focus != "0" && s.getId() != $focus){
             let newAssociation = new xAssociation($focus, s.getId());
             associations.add(newAssociation);
         }
         focus.set(s.getId())
-        console.log($focus);
     }
     function unfocus(){
         focus.set('0')
@@ -57,11 +56,11 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<svg x={s.x} y={s.y} width={s.getWidth()+4} height={s.getHeight() +4}>
-    <rect x={2} y={2} width={s.getWidth()} height={s.getHeight()} on:mousedown={onMouseDown} stroke="black" stroke-width="2" fill="ghostwhite" rx="10" ry="10" class=" hover:cursor-move" />
+<svg x={s.x} y={s.y} width={s.getWidth()+4} height={s.getHeight() +4} on:click|stopPropagation={setfocus}>
+    <rect x={2} y={2} width={s.getWidth()} height={s.getHeight()} on:mousedown={onMouseDown}  stroke={$focus == s.getId() ? "mediumslateblue": "black"} stroke-width="2" fill={$focus == s.getId() ? "silver": "ghostwhite"} rx="10" ry="10" class=" hover:cursor-move" />
     
     <g on:dblclick|stopPropagation={titleDblClick} bind:this={xtitle}>
-        <text on:click|stopPropagation={clicked} x={s.getWidth()/2} y={20} text-anchor="middle" font-size="16" font-weight="bold">{s.name}</text>
+        <text x={s.getWidth()/2} y={20} text-anchor="middle" font-size="16" font-weight="bold">{s.name}</text>
     </g>
     
     <line x1={2} y1={24} x2={s.getWidth()+2} y2={24} stroke="black" stroke-width="2" />
