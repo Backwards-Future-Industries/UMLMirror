@@ -1,9 +1,8 @@
 <script lang="ts">
-    import type { xClass } from "$lib/objects/xClass";
     import { classes } from "$lib/stores/classes";
 
     export let data:data;
-    export let s: xClass
+    export let classID: string
     export let startY: number
     let graphicsElement: SVGGraphicsElement;
     let BBox: DOMRect;
@@ -18,7 +17,7 @@
     function closeEditor(){
         editable = false;
         data.value = editText.split(/\r?\n/);
-        classes.replace(s.getId(),s)
+        classes.replace(classID,classes.get(classID))
     }
     
     function arraytostring(list:string[]): string{

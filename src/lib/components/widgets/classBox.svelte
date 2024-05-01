@@ -73,11 +73,11 @@
     
     <line x1={2} y1={24} x2={s.getWidth()+2} y2={24} stroke="black" stroke-width="2" />
     
-    <DataField startY={40} s={s} data={s.attributes}/>
+    <DataField startY={40} classID={s.getId()} data={s.attributes}/>
     
     <line x1={2} y1={(2+s.getAttributeLines())*16} x2={s.getWidth()+2} y2={(2+s.getAttributeLines())*16} stroke="black" stroke-width="2" />
 
-    <DataField startY={(3+s.getAttributeLines())*16} s={s} data={s.methods} />
+    <DataField startY={(3+s.getAttributeLines())*16} classID={s.getId()} data={s.methods} />
 </svg>
 
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} on:click={unfocus}/>
