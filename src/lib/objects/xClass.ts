@@ -1,6 +1,4 @@
 import type { Dictionary } from "$lib/objects/dictionary";
-import { faker } from '@faker-js/faker/locale/da';
-
 export class xClass implements xclass {
     name: string;
     attributes: attribute;
@@ -13,7 +11,7 @@ export class xClass implements xclass {
     
     constructor(id: string, name?:string, attributes?:attribute, methods?:method, x?:number, y?:number, width?: number, height?: number){
         this.id = id;
-        this.name = name ?? faker.person.firstName();
+        this.name = name ?? 'New class';
         this.attributes = attributes ?? {value: ['+ attribute1:type','- attribute2:type']};
         this.methods = methods ?? {value:['+ operation1(params):returnType','- operation2(params)','- operation3(params)']};
         this.x = x ?? 0;

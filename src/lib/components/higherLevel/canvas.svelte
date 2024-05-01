@@ -1,6 +1,6 @@
 <script lang="ts">
-    import ClassBox from "./classBox.svelte";
-    import Association from './association.svelte';
+    import ClassBox from "../widgets/classBox.svelte";
+    import Association from '../widgets/association.svelte';
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
 

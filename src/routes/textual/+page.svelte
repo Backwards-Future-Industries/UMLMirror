@@ -1,5 +1,5 @@
 <script lang="ts">
-    import TextAreaInput from "$lib/components/textAreaInput.svelte";
+    import TextAreaInput from "$lib/components/higherLevel/textAreaInput.svelte";
     import { onMount } from "svelte";
     import { handleGenSVG } from "$lib/logic/graphvizLogic";
     
@@ -12,7 +12,6 @@
     function handleClick() {
         handleGenSVG().then(result => svgString = result);
     }
- 
 
 </script>
 
@@ -22,7 +21,3 @@
         {@html svgString}
     </div>
 </div>
-
-
-
-  
