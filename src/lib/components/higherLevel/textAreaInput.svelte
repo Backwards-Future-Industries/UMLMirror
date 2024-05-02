@@ -16,9 +16,6 @@
     let classArea: string =  '';
     let associationArea: string = '';
 
-    $: classes.subscribe(() => generateTextFromStores());
-    $: associations.subscribe(() => generateTextFromStores());
-
     function handleTab(e: KeyboardEvent) {
         if (e.key === "Tab") {
             e.preventDefault();
