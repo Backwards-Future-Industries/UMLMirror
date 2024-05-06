@@ -9,6 +9,11 @@
     let class1 = classes.get(classId1);
     let class2 = classes.get(classId2);
 
+    $: x1 = Math.round(class1.x + class1.getWidth()/2)
+    $: y1 = Math.round(class1.y + class1.getHeight()/2)
+    $: x2 = Math.round(class2.x + class2.getWidth()/2)
+    $: y2 = Math.round(class2.y+ class2.getHeight()/2)
+
     classes.subscribe((value) => {
         class1 = value[classId1];
         class2 = value[classId2];
@@ -21,13 +26,14 @@
     function unfocus(){
         associationFocus.set(-1)
     }
+    
 
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg>
-    <line x1={class1.x + class1.getWidth()/2} y1={class1.y + class1.getHeight()/2} x2={class2.x + class2.getWidth()/2} y2={class2.y+ class2.getHeight()/2} stroke={$associationFocus==id ? "mediumslateblue":"black"} stroke-width="2" on:click|stopPropagation={setfocus} class=" hover:cursor-pointer"/>
+    <path d="M{x1},{y1} {x2},{y2}" stroke={$associationFocus==id ? "mediumslateblue":"black"} stroke-width="2" on:click|stopPropagation={setfocus} class=" hover:cursor-pointer"/>
 </svg>
 
 <svelte:window on:click={unfocus}/>
