@@ -95,6 +95,7 @@ function createClasses(initialValue: Dictionary){
             klasse.y = Number(lineSplit[3]) * 72
             replace(klasse.getId(),klasse)
         }
+        save()
     }
 
     return {

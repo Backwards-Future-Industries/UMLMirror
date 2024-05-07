@@ -6,18 +6,15 @@
     export let classId2: string;
     export let id: number
     
-    let class1 = classes.get(classId1);
-    let class2 = classes.get(classId2);
+    $: class1 = $classes[classId1]
+    $: class2 = $classes[classId2]
 
     $: x1 = Math.round(class1.x + class1.getWidth()/2)
     $: y1 = Math.round(class1.y + class1.getHeight()/2)
     $: x2 = Math.round(class2.x + class2.getWidth()/2)
-    $: y2 = Math.round(class2.y+ class2.getHeight()/2)
+    $: y2 = Math.round(class2.y + class2.getHeight()/2)
 
-    classes.subscribe((value) => {
-        class1 = value[classId1];
-        class2 = value[classId2];
-    });
+    
 
     function setfocus(){
         associationFocus.set(id)

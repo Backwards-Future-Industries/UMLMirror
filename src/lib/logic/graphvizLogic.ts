@@ -38,5 +38,6 @@ export async function handlePrettify(){
     console.log(result);
 
     classes.updateFromDotString(result)
+    associations.updateFromDotString(result)
 
 }
