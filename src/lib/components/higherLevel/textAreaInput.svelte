@@ -6,15 +6,19 @@
     import { xClass } from "$lib/objects/xClass";
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
+    import { TextGenerator } from "$lib/logic/textGeneratorLogic";
+    import { associationTextArea, classTextArea, updateAssociationTextArea, updateClassTextArea } from "$lib/stores/textAreas";
     import Button from "../button.svelte";
 
+
     onMount(() => {
-        generateTextFromStores();
+        updateClassTextArea();
+        updateAssociationTextArea();
     });
 
     let dispatch = createEventDispatcher();
-    let classArea: string =  '';
-    let associationArea: string = '';
+    $: classArea = $classTextArea;
+    $: associationArea = $associationTextArea;
 
     function handleTab(e: KeyboardEvent) {
         if (e.key === "Tab") {
@@ -124,26 +128,9 @@
         updateClasses(classArea);
         updateAssociations(associationArea);
 
-        generateTextFromStores();
+        updateClassTextArea();
+        updateAssociationTextArea();
 
-    }
-
-    function generateTextFromStores(){
-        let importedAssociations: string = associations.stringify();
-        associationArea = importedAssociations;
-        let filteredClasses= filterFields(classes.getAll());
-        classArea = JSON.stringify(filteredClasses,null,1);
-    }
-
-    function filterFields(jsonData: any): any {
-        let filteredData: { [key: string]: any } = {};
-
-        for (const key in jsonData) {
-            const { x, y, width, height, ...rest } = jsonData[key];
-            filteredData[key] = rest;
-        }
-
-        return filteredData;
     }
 
     function handleClick() {
