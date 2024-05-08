@@ -9,8 +9,6 @@
     
     $: from = $classes[fromID]
     $: to = $classes[toID]
-    $: controlPointsList = $associations[id].controlPoints
-    $: controlPoints = createControlPointString(controlPointsList)
 
 
     $: x1 = Math.round(from.x + from.getWidth()/2)
@@ -25,31 +23,13 @@
     function unfocus(){
         associationFocus.set(-1)
     }
-    
-    function createControlPointString(list: string[]): string{
-
-        let points:Number[] = []
-        
-        list.forEach((value)=>{
-            points.push(Number(value)*72)
-        })
-
-        let controlPointString = 'C'
-        points.forEach((value,index)=>{
-            if (index % 2 == 0){
-                controlPointString += `${value},${points[index+1]} `
-            }
-        })
-
-        return controlPointString
-    }
 
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg>
-    <path d="M{x1},{y1} {controlPoints} {x2},{y2}" stroke={$associationFocus==id ? "mediumslateblue":"black"} stroke-width="2" on:click|stopPropagation={setfocus} class=" hover:cursor-pointer"/>
+    <path d="M{x1},{y1} {x2},{y2}" stroke={$associationFocus==id ? "mediumslateblue":"black"} stroke-width="2" on:click|stopPropagation={setfocus} class=" hover:cursor-pointer"/>
 </svg>
 
 <svelte:window on:click={unfocus}/>

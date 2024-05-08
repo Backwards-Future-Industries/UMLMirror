@@ -1,24 +1,21 @@
 export class xAssociation implements association {
     from: string;
     to: string;
-    controlPoints: string[]
     
-    constructor(from: string, to: string, controlPoints?: string[]){
+    constructor(from: string, to: string){
         this.from = from;
         this.to = to;
-        this.controlPoints = controlPoints?? ['']
     }
 
     toJSON(){
         return{
             from: this.from,
-            to: this.to,
-            controlPoints: this.controlPoints
+            to: this.to
         }
     }
 
     static fromJSON(json: any): xAssociation {
-        return new xAssociation(json.from, json.to, json.controlPoints);
+        return new xAssociation(json.from, json.to);
     }
 
     static fromJSONString(json: string | null): xAssociation[] {

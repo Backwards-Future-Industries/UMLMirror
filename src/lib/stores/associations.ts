@@ -93,10 +93,8 @@ function createAssociations(initialValue: xAssociation[]){
             
             let from = lineSplit[1]
             let to = lineSplit[2]
-            let amountControlPoints = Number(lineSplit[3])*2
-            let controlPoints = lineSplit.slice(4,amountControlPoints+4)
 
-            add(new xAssociation(from,to,controlPoints))
+            add(new xAssociation(from,to))
         }
         save()
     }
