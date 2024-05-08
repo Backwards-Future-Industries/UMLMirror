@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { incrementer } from './incrementer';
 import type { Dictionary } from '$lib/objects/dictionary';
-import { updateClassTextArea } from './textAreas';
+import { associations } from './associations';
 
 const initialvalue: Dictionary = getDictionary();
 
@@ -28,7 +28,6 @@ function createClasses(initialValue: Dictionary){
         classes.update(current => ({ ...current, [key]: value }));
         save();
     }
-    updateClassTextArea
 
     function remove(key: string): void {
         classes.update(current => {
@@ -37,7 +36,6 @@ function createClasses(initialValue: Dictionary){
             return newState;
         });
         save();
-        updateClassTextArea();
     }
 
     function get(key: string): xClass {
@@ -71,7 +69,6 @@ function createClasses(initialValue: Dictionary){
             };
         });
         save();
-        updateClassTextArea
     }
 
     function stringify(): string {
