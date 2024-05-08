@@ -6,10 +6,14 @@
     import { xClass } from "$lib/objects/xClass";
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
+    import { TextGenerator } from "$lib/logic/textGeneratorLogic";
     import Button from "../button.svelte";
 
+    let generator = TextGenerator.getInstance();
+
     onMount(() => {
-        generateTextFromStores();
+        classArea = generator.generateClassText();
+        associationArea = generator.generateAssociationText();
     });
 
     let dispatch = createEventDispatcher();
@@ -124,26 +128,9 @@
         updateClasses(classArea);
         updateAssociations(associationArea);
 
-        generateTextFromStores();
+        generator.generateClassText();
+        generator.generateAssociationText();
 
-    }
-
-    function generateTextFromStores(){
-        let importedAssociations: string = associations.stringify();
-        associationArea = importedAssociations;
-        let filteredClasses= filterFields(classes.getAll());
-        classArea = JSON.stringify(filteredClasses,null,1);
-    }
-
-    function filterFields(jsonData: any): any {
-        let filteredData: { [key: string]: any } = {};
-
-        for (const key in jsonData) {
-            const { x, y, width, height, ...rest } = jsonData[key];
-            filteredData[key] = rest;
-        }
-
-        return filteredData;
     }
 
     function handleClick() {
