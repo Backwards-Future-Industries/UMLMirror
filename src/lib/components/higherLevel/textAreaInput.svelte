@@ -3,6 +3,7 @@
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
     import { incrementer } from "$lib/stores/incrementer";
+    import { classTextArea, associationTextArea } from "$lib/stores/textAreas";
     import { xClass } from "$lib/objects/xClass";
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
@@ -11,14 +12,9 @@
 
     let generator = TextGenerator.getInstance();
 
-    onMount(() => {
-        classArea = generator.generateClassText();
-        associationArea = generator.generateAssociationText();
-    });
-
     let dispatch = createEventDispatcher();
-    let classArea: string =  '';
-    let associationArea: string = '';
+    $: classArea = $classTextArea;
+    $: associationArea = $associationTextArea;
 
     function handleTab(e: KeyboardEvent) {
         if (e.key === "Tab") {
@@ -127,10 +123,6 @@
         
         updateClasses(classArea);
         updateAssociations(associationArea);
-
-        generator.generateClassText();
-        generator.generateAssociationText();
-
     }
 
     function handleClick() {
