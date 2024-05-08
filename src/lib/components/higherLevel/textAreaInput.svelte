@@ -7,18 +7,18 @@
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
     import { TextGenerator } from "$lib/logic/textGeneratorLogic";
+    import { associationTextArea, classTextArea, updateAssociationTextArea, updateClassTextArea } from "$lib/stores/textAreas";
     import Button from "../button.svelte";
 
-    let generator = TextGenerator.getInstance();
 
     onMount(() => {
-        classArea = generator.generateClassText();
-        associationArea = generator.generateAssociationText();
+        updateClassTextArea();
+        updateAssociationTextArea();
     });
 
     let dispatch = createEventDispatcher();
-    let classArea: string =  '';
-    let associationArea: string = '';
+    $: classArea = $classTextArea;
+    $: associationArea = $associationTextArea;
 
     function handleTab(e: KeyboardEvent) {
         if (e.key === "Tab") {
@@ -128,8 +128,8 @@
         updateClasses(classArea);
         updateAssociations(associationArea);
 
-        generator.generateClassText();
-        generator.generateAssociationText();
+        updateClassTextArea();
+        updateAssociationTextArea();
 
     }
 
