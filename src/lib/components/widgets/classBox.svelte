@@ -58,7 +58,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<svg x={s.x} y={s.y} width={s.getWidth()+4} height={s.getHeight() +4} on:click|stopPropagation={setfocus} bind:contentRect={classBBox}>
+<svg x={s.x} y={s.y} width={s.getWidth()+4} height={s.getHeight()+4} on:click|stopPropagation={setfocus} bind:contentRect={classBBox}>
     <rect x={2} y={2} width={s.getWidth()} height={s.getHeight()} on:mousedown={onMouseDown}  stroke={$classFocus == s.getId() ? "mediumslateblue": "black"} stroke-width="2" fill={$classFocus == s.getId() ? "silver": "ghostwhite"} rx="10" ry="10" class=" hover:cursor-move" />
 
     {#if !titleEdit}

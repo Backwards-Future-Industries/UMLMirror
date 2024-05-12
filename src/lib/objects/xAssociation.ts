@@ -2,10 +2,9 @@ export class xAssociation implements association {
     from: string;
     to: string;
     
-    constructor(id1: string, id2: string){
-        this.from = id1;
-        this.to = id2;
-        
+    constructor(from: string, to: string){
+        this.from = from;
+        this.to = to;
     }
 
     toJSON(){

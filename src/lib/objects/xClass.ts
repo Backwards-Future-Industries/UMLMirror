@@ -48,6 +48,14 @@ export class xClass implements xclass {
         return this.y; 
     }
 
+    getXMax():number{
+        return this.x + this.width
+    }
+
+    getYMax():number{
+        return this.x + this.height
+    }
+
     getWidth(){
         let longestString = this.name.length
 

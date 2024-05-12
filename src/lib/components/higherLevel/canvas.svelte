@@ -42,7 +42,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <svg id="diagram"  class="flex" width={width} height={height}>
     {#each $associations as association, index}
-        <Association classId1={association.from} classId2={association.to} id={index} />
+        <Association fromID={association.from} toID={association.to} id={index} />
     {/each}
     {#each Object.values($classes) as box}
         <ClassBox s={box}/>

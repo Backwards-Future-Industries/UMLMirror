@@ -36,6 +36,13 @@ function createAssociations(initialValue: xAssociation[]){
         save();
     }
 
+    function removeAll():void{
+        associations.update(current => {
+            return [];
+        });
+        save();
+    }
+
     function get(index: number): xAssociation {
         let association: xAssociation | undefined;
         associations.subscribe($associations => {
@@ -74,6 +81,24 @@ function createAssociations(initialValue: xAssociation[]){
         updateAssociationTextArea();
     }
 
+    function updateFromDotString(dotString:string):void{
+        let allLines = dotString.split('\n')
+
+        let matchingLines = allLines.filter(line => line.includes('edge'))
+        
+        removeAll()
+        
+        for(let line of matchingLines){
+            let lineSplit = line.split(/\s+/);
+            
+            let from = lineSplit[1]
+            let to = lineSplit[2]
+
+            add(new xAssociation(from,to))
+        }
+        save()
+    }
+
     return {
         ...associations,
         add,
@@ -81,6 +106,7 @@ function createAssociations(initialValue: xAssociation[]){
         get,
         getAll,
         stringify,
-        deleteFromKey
+        deleteFromKey,
+        updateFromDotString
     }
 }
