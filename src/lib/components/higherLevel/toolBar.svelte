@@ -5,24 +5,20 @@
     import { incrementer } from '$lib/stores/incrementer';
     import { xClass } from '$lib/objects/xClass';
     import { classFocus,associationFocus } from '$lib/stores/focuses'
-    import { updateAssociationTextArea, updateClassTextArea } from "$lib/stores/textAreas";
-    import { handlePrettify } from "$lib/logic/graphvizLogic";
+    import { handlePrettify } from "$lib/scripts/APICalls";
 
     function handleClass(){
         incrementer.increment();
         let newClass = new xClass(incrementer.getString());
         classes.add(incrementer.getString(), newClass);
-        updateClassTextArea();
     }
     function deleteClass(){
         classes.remove($classFocus);
         associations.deleteFromKey($classFocus);
-        updateClassTextArea();
     }
     function deleteAssociation(){
         associations.remove($associationFocus)
         associationFocus.set(-1)
-        updateAssociationTextArea();
     }
 </script>
 

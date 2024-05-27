@@ -1,19 +1,12 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
     import { incrementer } from "$lib/stores/incrementer";
     import { xClass } from "$lib/objects/xClass";
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
-    import { associationTextArea, classTextArea, updateAssociationTextArea, updateClassTextArea } from "$lib/stores/textAreas";
+    import { associationTextArea, classTextArea } from "$lib/stores/textAreas";
     import Button from "../widgets/button.svelte";
-
-
-    onMount(() => {
-        updateClassTextArea();
-        updateAssociationTextArea();
-    });
 
     let dispatch = createEventDispatcher();
     $: classArea = $classTextArea;
@@ -125,10 +118,7 @@
     function updateDiagram() {
         
         updateClasses(classArea);
-        updateAssociations(associationArea);
-
-        updateClassTextArea();
-        updateAssociationTextArea();
+        updateAssociations(associationArea);    
 
     }
 

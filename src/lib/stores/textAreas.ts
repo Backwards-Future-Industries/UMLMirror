@@ -1,13 +1,26 @@
-import { writable } from 'svelte/store';
-import { TextGenerator } from '$lib/logic/textGeneratorLogic';
+import { derived } from 'svelte/store';
+import { classes } from './classes';
+import { associations } from './associations';
 
-export const classTextArea = writable('');
-export const associationTextArea = writable('');
+export const classTextArea = derived(
+    classes,
+    ($classes) => JSON.stringify(filterFields($classes),null,1)
 
-export function updateClassTextArea() {
-    classTextArea.set(TextGenerator.getInstance().generateClassText());
-}
+)
 
-export function updateAssociationTextArea() {
-    associationTextArea.set(TextGenerator.getInstance().generateAssociationText());
+export const associationTextArea = derived(
+    associations,
+    ($associations) => JSON.stringify($associations)
+)
+
+
+function filterFields(jsonData: any): any {
+    let filteredData: { [key: string]: any } = {};
+
+    for (const key in jsonData) {
+        const { x, y, width, height, ...rest } = jsonData[key];
+        filteredData[key] = rest;
+    }
+
+    return filteredData;
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import TextAreaInput from "$lib/components/higherLevel/textAreaInput.svelte";
     import { onMount } from "svelte";
-    import { handleGenSVG } from "$lib/logic/graphvizLogic";
+    import { handleGenSVG } from "$lib/scripts/APICalls";
     
     let svgString: String = "<svg></svg>";
 

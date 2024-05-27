@@ -2,7 +2,6 @@ import { writable} from 'svelte/store';
 import { xAssociation } from '$lib/objects/xAssociation';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
-import { updateAssociationTextArea } from "$lib/stores/textAreas";
 
 const initialvalue: xAssociation[] = getArray();
 
@@ -24,7 +23,6 @@ function createAssociations(initialValue: xAssociation[]){
     function add(value: xAssociation): void {
         update(current => ([...current, value ]));
         save();
-        updateAssociationTextArea();
     }
 
     function remove(index: number): void {
@@ -78,7 +76,6 @@ function createAssociations(initialValue: xAssociation[]){
             return newState;
         });
         save();
-        updateAssociationTextArea();
     }
 
     function updateFromDotString(dotString:string):void{

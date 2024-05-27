@@ -4,8 +4,6 @@ import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { incrementer } from './incrementer';
 import type { Dictionary } from '$lib/objects/dictionary';
-import { updateClassTextArea } from "$lib/stores/textAreas";
-
 
 export const classes = createClasses(getDictionary());
 
@@ -68,7 +66,6 @@ function createClasses(initialValue: Dictionary){
             };
         });
         save();
-        updateClassTextArea();
     }
 
     function stringify(): string {
