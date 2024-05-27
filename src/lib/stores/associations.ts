@@ -1,4 +1,4 @@
-import { writable, type Updater } from 'svelte/store';
+import { writable} from 'svelte/store';
 import { xAssociation } from '$lib/objects/xAssociation';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';

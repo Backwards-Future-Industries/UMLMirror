@@ -1,4 +1,4 @@
-import { writable, type Updater } from 'svelte/store';
+import { writable} from 'svelte/store';
 import { xClass } from '$lib/objects/xClass';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
@@ -6,10 +6,7 @@ import { incrementer } from './incrementer';
 import type { Dictionary } from '$lib/objects/dictionary';
 import { updateClassTextArea } from "$lib/stores/textAreas";
 
-
-const initialvalue: Dictionary = getDictionary();
-
-export const classes = createClasses(initialvalue);
+export const classes = createClasses(getDictionary());
 
 function getDictionary(): Dictionary {
     let rawData: string | null = null;

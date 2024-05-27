@@ -1,5 +1,5 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { generateSVG, prettify } from '$lib/server/graphviz';
+import { generateSVG} from '$lib/server/graphviz';
 
 export const POST: RequestHandler = async ({ request }) => {
 

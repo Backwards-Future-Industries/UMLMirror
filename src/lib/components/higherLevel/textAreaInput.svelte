@@ -6,7 +6,6 @@
     import { xClass } from "$lib/objects/xClass";
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
-    import { TextGenerator } from "$lib/logic/textGeneratorLogic";
     import { associationTextArea, classTextArea, updateAssociationTextArea, updateClassTextArea } from "$lib/stores/textAreas";
     import Button from "../button.svelte";
 
