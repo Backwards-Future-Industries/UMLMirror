@@ -11,50 +11,47 @@ export function updateText(classText:string, associationText:string){
 
 function updateClasses(classAreaText: string){
     let parsedClasses = JSON.parse(classAreaText);
-    let parsedIds = Object.values(parsedClasses).map(obj => obj.id);
+    let parsedKeys = Object.keys(parsedClasses);
     let currentClasses = classes.getAll();
-    let currentIds = Object.keys(currentClasses).map(key => currentClasses[key].getId());
+    let currentKeys = Object.keys(currentClasses);
 
     //Remove removed classes
-    currentIds.forEach(id => {
-        if (!parsedIds.includes(id)) {
-            let idToRemove = Object.keys(currentClasses).find(key => currentClasses[key].getId() === id);
-            if (idToRemove) {
-                classes.remove(idToRemove);
-                associations.deleteFromKey(id);
-            }
+    currentKeys.forEach(key => {
+        if (!parsedKeys.includes(key)) {
+            classes.remove(key);
+            associations.deleteFromKey(key);
         }
     });
 
     //updates existing classes
-    parsedIds.forEach(id => {
-        if (currentIds.includes(id)) {
+    parsedKeys.forEach(key => {
+        if (currentKeys.includes(key)) {
             let updatedClass = new xClass(
-                parsedClasses[id].id, 
-                parsedClasses[id].name, 
-                parsedClasses[id].attributes, 
-                parsedClasses[id].methods,
-                currentClasses[id].getX(),
-                currentClasses[id].getY(),
-                currentClasses[id].getWidth(),
-                currentClasses[id].getHeight()
+                key, 
+                parsedClasses[key].name, 
+                parsedClasses[key].attributes, 
+                parsedClasses[key].methods,
+                currentClasses[key].getX(),
+                currentClasses[key].getY(),
+                currentClasses[key].getWidth(),
+                currentClasses[key].getHeight()
                 );
-            classes.replace(id, updatedClass);
+            classes.replace(key, updatedClass);
         }
     });
 
     //Adds new classes
-    parsedIds.forEach(id => {
-        if (!currentIds.includes(id)) {
-            let classToAdd = parsedClasses[id];
+    parsedKeys.forEach(key => {
+        if (!currentKeys.includes(key)) {
+            let classToAdd = parsedClasses[key];
             let newClass = new xClass(
-                classToAdd.id, 
+                key.toString(), 
                 classToAdd.name, 
                 classToAdd.attributes, 
                 classToAdd.methods
                 );
-            incrementer.increment();
-            classes.add(classToAdd.id, newClass);
+            classes.add(key, newClass);
+            incrementer.set(Object.keys(currentClasses).length + 1);
         }
     });
 

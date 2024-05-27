@@ -20,7 +20,7 @@
 </script>
 
 <div class="flex flex-col h-screen">
-    <div class="h-2/3">
+    <div class="h-2/3 pb-9">
         <TextWindow bind:text={classText} title={'Classes'} on:textChange={handleUpdate}/>
     </div>
     <div class="h-1/3">
