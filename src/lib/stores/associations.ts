@@ -19,16 +19,16 @@ function getArray(): xAssociation[] {
 
 function createAssociations(initialValue: xAssociation[]){
     
-    const associations = writable<xAssociation[]>(initialValue);
+    const { subscribe, update } = writable<xAssociation[]>(initialValue);
 
     function add(value: xAssociation): void {
-        associations.update(current => ([...current, value ]));
+        update(current => ([...current, value ]));
         save();
         updateAssociationTextArea();
     }
 
     function remove(index: number): void {
-        associations.update(current => {
+        update(current => {
             const newState = [...current ];
             newState.splice(index, 1);
             return newState;
@@ -37,7 +37,7 @@ function createAssociations(initialValue: xAssociation[]){
     }
 
     function removeAll():void{
-        associations.update(current => {
+        update(current => {
             return [];
         });
         save();
@@ -73,7 +73,7 @@ function createAssociations(initialValue: xAssociation[]){
     }
 
     function deleteFromKey(key: string): void {
-        associations.update(current => {
+        update(current => {
             const newState = current.filter((item) => item.from !== key && item.to !== key);
             return newState;
         });
@@ -100,7 +100,7 @@ function createAssociations(initialValue: xAssociation[]){
     }
 
     return {
-        ...associations,
+        subscribe,
         add,
         remove,
         get,

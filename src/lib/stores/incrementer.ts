@@ -4,18 +4,18 @@ export const incrementer = createIncrementer();
 
 function createIncrementer(){
     
-    const incrementer = writable<number>(0);
+    const { subscribe, update } = writable<number>(0);
 
     function increment(): void {
-        incrementer.update((current) => current + 1);
+        update((current) => current + 1);
     }
 
     function decrement(): void {
-        incrementer.update((current) => current - 1);
+        update((current) => current - 1);
     }
 
     function set(value: number): void {
-        incrementer.update(() => value);
+        update(() => value);
     }
 
     function getString(): string {
@@ -27,7 +27,7 @@ function createIncrementer(){
     }
 
     return {
-        ...incrementer,
+        subscribe,
         increment,
         decrement,
         set,
