@@ -34,8 +34,7 @@ export async function handlePrettify(){
         },
     });
 
-    let {result} = await response.json();  
-    console.log(result);
+    let {result} = await response.json(); 
 
     classes.updateFromDotString(result)
     associations.updateFromDotString(result)

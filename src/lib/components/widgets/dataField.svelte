@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { updateText } from "$lib/scripts/textParser";
     import { classes } from "$lib/stores/classes";
 
     export let data:data;
@@ -16,8 +17,6 @@
 
     function closeEditor(){
         editable = false;
-        data.value = editText.split(/\r?\n/);
-        classes.replace(classID,classes.get(classID))
     }
     
     function arraytostring(list:string[]): string{
@@ -30,6 +29,10 @@
             }
         })
         return result
+    }
+    function changeText(){
+        data.value = editText.split(/\r?\n/);
+        classes.replace(classID,classes.get(classID))
     }
 
 </script>
@@ -44,7 +47,7 @@
     </g>
 {:else}
     <foreignObject x={BBox.x} y={BBox.y} width={BBox.width} height={BBox.height} on:click|stopPropagation={()=>{}}>
-        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" bind:value={editText}/>
+        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" on:input={changeText} bind:value={editText}/>
     </foreignObject>
 {/if}
 

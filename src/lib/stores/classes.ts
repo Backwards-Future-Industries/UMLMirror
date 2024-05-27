@@ -1,15 +1,11 @@
-import { writable, type Updater } from 'svelte/store';
+import { writable} from 'svelte/store';
 import { xClass } from '$lib/objects/xClass';
 import { error } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { incrementer } from './incrementer';
 import type { Dictionary } from '$lib/objects/dictionary';
-import { updateClassTextArea } from "$lib/stores/textAreas";
 
-
-const initialvalue: Dictionary = getDictionary();
-
-export const classes = createClasses(initialvalue);
+export const classes = createClasses(getDictionary());
 
 function getDictionary(): Dictionary {
     let rawData: string | null = null;
@@ -23,15 +19,15 @@ function getDictionary(): Dictionary {
 
 function createClasses(initialValue: Dictionary){
     
-    const classes = writable<Dictionary>(initialValue);
+    const { subscribe, update } = writable<Dictionary>(initialValue);
 
     function add(key: string, value: xClass): void {
-        classes.update(current => ({ ...current, [key]: value }));
+        update(current => ({ ...current, [key]: value }));
         save();
     }
 
     function remove(key: string): void {
-        classes.update(current => {
+        update(current => {
             const newState = { ...current };
             delete newState[key];
             return newState;
@@ -41,7 +37,7 @@ function createClasses(initialValue: Dictionary){
 
     function get(key: string): xClass {
         let itemValue: xClass | undefined;
-        classes.subscribe($classes => {
+        subscribe($classes => {
             itemValue = $classes[key];
         })();
         if (itemValue === undefined) {
@@ -52,14 +48,14 @@ function createClasses(initialValue: Dictionary){
     
     function getAll(): Dictionary {
         let allValues: Dictionary = {};
-        classes.subscribe($classes => {
+        subscribe($classes => {
             allValues = $classes;
         })();
         return allValues;
     }
 
     function replace(key: string, value: xClass): void {
-        classes.update(current => {
+        update(current => {
             if (current[key] === undefined) {
                 error(404, `Flot klaret. Key ${key} not found in the store. ${JSON.stringify(getAll())}`);
             }
@@ -70,7 +66,6 @@ function createClasses(initialValue: Dictionary){
             };
         });
         save();
-        updateClassTextArea();
     }
 
     function stringify(): string {
@@ -99,7 +94,7 @@ function createClasses(initialValue: Dictionary){
     }
 
     return {
-        ...classes,
+        subscribe,
         add,
         remove,
         get,
