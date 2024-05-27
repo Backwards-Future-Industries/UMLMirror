@@ -20,6 +20,10 @@
 </script>
 
 <div class="flex flex-col h-screen">
-    <TextWindow bind:text={classText} title={'Classes'} on:textChange={handleUpdate}/>
-    <TextWindow bind:text={associationText} title={'Associations'} on:textChange={handleUpdate}/>
+    <div class="h-2/3">
+        <TextWindow bind:text={classText} title={'Classes'} on:textChange={handleUpdate}/>
+    </div>
+    <div class="h-1/3">
+        <TextWindow bind:text={associationText} title={'Associations'} on:textChange={handleUpdate}/>
+    </div>
 </div>

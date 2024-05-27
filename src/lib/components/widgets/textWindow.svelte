@@ -23,4 +23,4 @@
 </script>
 
 <h2 class="text-2xl font-bold text-center bg-base-400 p-1">{title}</h2>
-<textarea on:keydown={handleTab} id="classText" class="resize-none w-96 bg-base-200 pl-3 pt-2 pr-3 font-mono flex-grow h-3/4 border-2 border-r-2 rounded" spellcheck="false" bind:value={text} on:change={textchanged}/>
+<textarea on:keydown={handleTab} id="classText" class="resize-none w-96 h-full bg-base-200 pl-3 pt-2 pr-3 font-mono flex-grow border-2 border-r-2 rounded" spellcheck="false" bind:value={text} on:change={textchanged}/>
