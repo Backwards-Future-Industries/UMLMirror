@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from "$lib/components/button.svelte";
+    import Button from "$lib/components/widgets/button.svelte";
     import { classes } from "$lib/stores/classes";
     import { associations } from "$lib/stores/associations";
     import { incrementer } from '$lib/stores/incrementer';

@@ -7,7 +7,7 @@
     import { xAssociation } from "$lib/objects/xAssociation";
     import { createEventDispatcher } from "svelte";
     import { associationTextArea, classTextArea, updateAssociationTextArea, updateClassTextArea } from "$lib/stores/textAreas";
-    import Button from "../button.svelte";
+    import Button from "../widgets/button.svelte";
 
 
     onMount(() => {
