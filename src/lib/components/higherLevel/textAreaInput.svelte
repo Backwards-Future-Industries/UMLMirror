@@ -6,8 +6,8 @@
     import { diagram } from "$lib/stores/diagram";
     
 
-    let classText = $classTextArea
-    let associationText = $associationTextArea
+    $: classText = $classTextArea
+    $: associationText = $associationTextArea
 
     function handleUpdate() {
         updateText(classText, associationText)
