@@ -46,7 +46,7 @@
     </g>
 {:else}
     <foreignObject x={BBox.x} y={BBox.y} width={BBox.width} height={BBox.height} on:click|stopPropagation={()=>{}}>
-        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" on:input={updateText} bind:value={editText}/>
+        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" on:input={updateText} on:change={updateText} bind:value={editText}/>
     </foreignObject>
 {/if}
 
