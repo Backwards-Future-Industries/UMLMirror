@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { updateText } from "$lib/scripts/textParser";
     import { classes } from "$lib/stores/classes";
 
     export let data:data;
@@ -30,7 +29,7 @@
         })
         return result
     }
-    function changeText(){
+    function updateText(){
         data.value = editText.split(/\r?\n/);
         classes.replace(classID,classes.get(classID))
     }
@@ -47,7 +46,7 @@
     </g>
 {:else}
     <foreignObject x={BBox.x} y={BBox.y} width={BBox.width} height={BBox.height} on:click|stopPropagation={()=>{}}>
-        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" on:input={changeText} bind:value={editText}/>
+        <textarea class="w-full h-full bg-transparent font-mono text-xs resize-none" on:input={updateText} bind:value={editText}/>
     </foreignObject>
 {/if}
 

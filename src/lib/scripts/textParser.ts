@@ -3,6 +3,7 @@ import { associations } from "$lib/stores/associations";
 import { incrementer } from "$lib/stores/incrementer";
 import { xClass } from "$lib/objects/xClass";
 import { xAssociation } from "$lib/objects/xAssociation";
+import type { Dictionary } from "$lib/objects/dictionary";
 
 export function updateText(classText:string, associationText:string){
     updateClasses(classText)
@@ -10,7 +11,7 @@ export function updateText(classText:string, associationText:string){
 }
 
 function updateClasses(classAreaText: string){
-    let parsedClasses = JSON.parse(classAreaText);
+    let parsedClasses:Dictionary = JSON.parse(classAreaText);
     let parsedKeys = Object.keys(parsedClasses);
     let currentClasses = classes.getAll();
     let currentKeys = Object.keys(currentClasses);
