@@ -15,6 +15,6 @@
   </div>
   <div
     class="bg-green-900 pl-10 pr-10 pt-5 pb-5 -mr-5 rounded-tr-[25px] rounded-br-[25px] text-white flex items-center justify-center font-mono text-2xl z-40">
-    <a href="/">UMLPlanter</a>
+    <a href="/">UMLMirror</a>
   </div> 
 </div>
