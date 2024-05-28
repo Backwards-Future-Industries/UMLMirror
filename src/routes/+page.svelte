@@ -10,8 +10,7 @@
         "value": [
             "+ getName():String"
         ]
-        },
-        "id": "1"
+        }
         }  
     }
 
@@ -56,8 +55,8 @@
         <h3 class="font-bold text-2xl py-2">Textual</h3>
         <div class="font-bold py-1">Creating a class</div>
         <div>The textual input works by parsing JSON, looking for the following fields: </div>
-        <div class="font-mono">'name','id','attributes' & 'methods'</div>
-        <div>The first two are strings, whilst the latter two are arrays[] of strings, 
+        <div class="font-mono">'name','attributes' & 'methods'</div>
+        <div>The name is a string, whilst the latter two are arrays[] of strings, 
             classes are written in the top text area, do note that in the current itteration of the tool 
             a key identical to the id is to be given before the class object.
             An example of a simple class can be seen below:</div>
