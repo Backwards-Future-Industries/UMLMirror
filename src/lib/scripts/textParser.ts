@@ -27,7 +27,7 @@ function updateClasses(classAreaText: string){
     parsedKeys.forEach(key => {
         if (currentKeys.includes(key)) {
             let updatedClass = new xClass(
-                key, 
+                key.toString(), 
                 parsedClasses[key].name, 
                 parsedClasses[key].attributes, 
                 parsedClasses[key].methods,
