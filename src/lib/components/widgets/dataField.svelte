@@ -11,6 +11,7 @@
 
     function attributeDblClick(){
         BBox = graphicsElement.getBBox();
+        editText = arraytostring(data.value);
         editable = true;
     }
 
